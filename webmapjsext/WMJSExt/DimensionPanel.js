@@ -290,6 +290,7 @@ Ext.define('webmapjsext.WMJSExt.DimensionPanel', {
             {title:'5 Minutes',name:'PT5M'},
             {title:'10 Minutes',name:'PT10M'},
             {title:'15 Minutes',name:'PT15M'},
+            {title:'20 Minutes',name:'PT20M'},  
             {title:'30 Minutes',name:'PT30M'},
             {title:'60 Minutes',name:'PT1H'},
             {title:'90 Minutes',name:'PT1H30M'},
