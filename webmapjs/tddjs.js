@@ -81,7 +81,7 @@ class tddjs {
       let myLayers=[]; 
       //let myLayer=null;
       for (let j = 0; j < webmapjs.layers.length; j++) {
-        //let myLayer = webmapjs.layers[webmapjs.layers.length - j - 1];
+        let myLayer = webmapjs.layers[webmapjs.layers.length - j - 1];
         
         let servtxt=webmapjs.layers[webmapjs.layers.length - j - 1].service;
         let layername=webmapjs.layers[webmapjs.layers.length - j - 1].name
@@ -89,6 +89,9 @@ class tddjs {
           myLayers.push(webmapjs.layers[webmapjs.layers.length - j - 1])
           //myLayer = webmapjs.layers[webmapjs.layers.length - j - 1];
         } else if (servtxt.includes("ECMWF") || servtxt.includes("HARMONIE") ) {
+          myLayers.push(webmapjs.layers[webmapjs.layers.length - j - 1])
+        } else if (layername.includes("sond_station") ){
+	  console.log("ENTRO POR SOND_STATION")
           myLayers.push(webmapjs.layers[webmapjs.layers.length - j - 1])
         } 
       } 
@@ -101,7 +104,7 @@ class tddjs {
       for (let i in myLayers){
         console.log(i,myLayers.length)
         if (myLayers[i].service.includes("HARMONIE") ||  myLayers[i].service.includes("ECMWF") || myLayers[i].service.includes("TEMP") || 
-           myLayers[i].service.includes("KRR") || myLayers[i].service.includes("KRF") || myLayers[i].service.includes("ASV_FCT") || myLayers[i].name == "sond_station" ) {
+           myLayers[i].service.includes("KRR") || myLayers[i].service.includes("KRF") || myLayers[i].service.includes("ASV_FCT") || myLayers[i].name.includes("sond_station") ) {
           console.log("MYLAYER_TEXT",myLayers[i].name )
           let myLayer=myLayers[i]; 
           //console.log("LAYER",myLayer)    
@@ -112,7 +115,7 @@ class tddjs {
                 document.getElementById("load").innerHTML = ""; 
                 let station=""
                 let meta=iURL.meta
-                if (myLayer.service.includes("TEMP") || myLayer.name == "sond_station" ){
+                if (myLayer.service.includes("TEMP") || myLayer.name.includes("sond_station") ){
                   station="Station"
                 } else if (myLayer.service.includes("ECMWF") ||myLayer.service.includes("HARMONIE") ){
                   let model=myLayer.service.split("=")[1]
@@ -292,8 +295,9 @@ function MakeHTTPRequest_s(fname, callbackfunction,useredirect, requestProxy) {
 };
 
 function getJSONdata(layer, webmapjs, x, y, format = "text/html", callback) {
+  console.log("LAYER",layer)
   let serv=layer.service.split("=")[1]
-  serv=serv.replace("&","") 
+  serv=serv.replace("&","")  
 
   document.getElementById("load").innerHTML += "Procesando<br>";
   document.getElementById("load").innerHTML +="<img src=\"./img/ajax-loader.gif\" alt=\"Loading...\"/>";  
@@ -311,7 +315,7 @@ function getJSONdata(layer, webmapjs, x, y, format = "text/html", callback) {
     rm += "&QUERY_LAYERS=" +'mean_sea_level_pressure' + "&INFO_FORMAT=" + "application/json";
     request += "&QUERY_LAYERS=" +'geopotential_height,temperature,relative_humidity,wind_barbs_vectors'+"&INFO_FORMAT=" + "application/json";
   } 
-  if (serv.includes("TEMP") ){ 
+  if (serv.includes("TEMP") || layer.name.includes("sond_station") ){ 
     request += "&QUERY_LAYERS=" +'p,z,t,td,windSpd,windDir,eVSS' + "&INFO_FORMAT=" + "application/json";
     rm += "&QUERY_LAYERS=" +'station_name,ps,alt,station_cname' +"&INFO_FORMAT=" + "application/json";
   } 
@@ -363,7 +367,7 @@ function getJSONdata(layer, webmapjs, x, y, format = "text/html", callback) {
   getMeta(rm,function(meta) {
     if (meta != null){
       console.log("META",meta)
-      if (rm.includes("TEMP")){ 
+      if (rm.includes("TEMP") || rm.includes("sond_station") ){ 
         getData(rl,meta,request,function(dat) {
           if (dat!=null){  
             let tJson={"meta":meta,"data":dat}; 
