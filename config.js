@@ -1159,6 +1159,12 @@ var dataChooserConfigurationPPI = [
     layer:'irisPPI_NJR_mask',
   },
   {
+    title:'PPI-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_PDG_mask',
+  },
+  {
     title:'PPI-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
@@ -1199,12 +1205,6 @@ var dataChooserConfigurationPPI = [
     thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
     layer:'irisPPI_VAL_mask',
-  },
-  {
-    title:'PPI-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_ZAR_mask',
   },
   {
     title:'PPI-COMP-NAC',
@@ -1266,6 +1266,12 @@ var dataChooserConfigurationCAPPI = [
     layer:'irisCAPPI_NJR_mask',
   },
   {
+    title:'CAPPI-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_PDG_mask',
+  },
+  {
     title:'CAPPI-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-CAPPI&',
@@ -1306,12 +1312,6 @@ var dataChooserConfigurationCAPPI = [
     thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-CAPPI&',
     layer:'irisCAPPI_VAL_mask',
-  },
-  {
-    title:'CAPPI-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
-    layer:'irisCAPPI_ZAR_mask',
   }
 ]
 
@@ -1366,6 +1366,12 @@ var dataChooserConfigurationTOPS = [
     layer:'irisTOPS_NJR_mask',
   },
   {
+    title:'TOPS-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_PDG_mask',
+  },
+  {
     title:'TOPS-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
@@ -1406,12 +1412,6 @@ var dataChooserConfigurationTOPS = [
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
     layer:'irisTOPS_VAL_mask',
-  },
-  {
-    title:'TOPS-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_ZAR_mask',
   },
   {
     title:'TOPS-COM-NAC',
@@ -1472,6 +1472,12 @@ var dataChooserConfigurationAC1H = [
     layer:'irisACUM1H_NJR_fullRange',
   },
   {
+    title:'ACUM1H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_PDG_fullRange',
+  },
+  {
     title:'ACUM1H-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_PMA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
@@ -1512,12 +1518,6 @@ var dataChooserConfigurationAC1H = [
     thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
     layer:'irisACUM1H_VAL_fullRange',
-  },
-  {
-    title:'ACUM1H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_ZAR_fullRange',
   },
   {
     title:'ACUM1H-COMP-NAC',
@@ -1579,6 +1579,12 @@ var dataChooserConfigurationAC6H = [
     layer:'irisACUM6H_NJR_fullRange',
   },
   {
+    title:'ACUM6H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_PDG_fullRange',
+  },
+  {
     title:'ACUM6H-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_PMA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
@@ -1619,12 +1625,6 @@ var dataChooserConfigurationAC6H = [
     thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
     layer:'irisACUM6H_VAL_fullRange',
-  },
-  {
-    title:'ACUM6H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_ZAR_fullRange',
   },
   {
     title:'ACUM6H-COMP-NAC',
@@ -1686,6 +1686,12 @@ var dataChooserConfigurationAC24H = [
     layer:'irisACUM24H_NJR_fullRange',
   },
   {
+    title:'ACUM24H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_PDG_fullRange',
+  },
+  {
     title:'ACUM24H-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_PMA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
@@ -1726,12 +1732,6 @@ var dataChooserConfigurationAC24H = [
     thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
     layer:'irisACUM24H_VAL_fullRange',
-  },
-  {
-    title:'ACUM24H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_ZAR_fullRange',
   },
   {
     title:'ACUM24H-COMP-NAC',
@@ -1794,6 +1794,12 @@ var dataChooserConfigurationVIL = [
     layer:'irisVIL_NJR_mask',
   },
   {
+    title:'VIL-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_PDG_mask',
+  },
+  {
     title:'VIL-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
@@ -1834,12 +1840,6 @@ var dataChooserConfigurationVIL = [
     thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
     layer:'irisVIL_VAL_mask',
-  },
-  {
-    title:'VIL-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_ZAR_mask',
   },
   {
     title:'VIL-COMP-NAC',
@@ -1901,6 +1901,12 @@ var dataChooserConfigurationPPID = [
     layer:'irisPPID_NJR_mask',
   },
   {
+    title:'PPID-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_PDG_mask',
+  },
+  {
     title:'PPID-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
@@ -1941,12 +1947,6 @@ var dataChooserConfigurationPPID = [
     thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
     layer:'irisPPID_VAL_mask',
-  },
-  {
-    title:'PPID-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_ZAR_mask',
   }
 ]
 
@@ -2001,6 +2001,12 @@ var dataChooserConfigurationPPIW = [
     layer:'irisPPIW_NJR_mask',
   },
   {
+    title:'PPIW-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_PDG_mask',
+  },
+  {
     title:'PPIW-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
@@ -2041,12 +2047,6 @@ var dataChooserConfigurationPPIW = [
     thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
     layer:'irisPPIW_VAL_mask',
-  },
-  {
-    title:'PPIW-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_ZAR_mask',
   }
 ]
 
