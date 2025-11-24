@@ -193,7 +193,7 @@ var hipatia_app = function (element, webmapjs) {
           var layerObj = currentData[$(this).attr("name")];
           //console.log(layerObj)
           window.location.hash =
-            "addlayer('" + wmsServiceURL + "','" + layerObj.name + "')";
+            "addlayer('" + wmsServiceURL + "&','" + layerObj.name + "')";
         });
       $(".autowms_app_fileitem_return")
         .attr("onclick", "")
@@ -226,7 +226,7 @@ var hipatia_app = function (element, webmapjs) {
           "<span class='autowms_app_error_container_header'>Unable to get WMS GetCapabilities</span>";
         html +=
           "<a target='_blank' href=\"" +
-          (wmsServiceURL + "service=WMS&request=GetCapabilities") +
+          (wmsServiceURL + "&service=WMS&request=GetCapabilities") +
           '">' +
           wmsServiceURL +
           "</a>";

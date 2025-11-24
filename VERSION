@@ -40,4 +40,5 @@ AEMET 1.2.1.1
 06-06-2025: AEMET 1.2.4.4: pluciag: Se cambia el logo de AEMET, Se incluye PT20M como intervalo de tiempo
 08-10-2025: AEMET 1.2.5.5: aarribasc: Se hacen modificaciones en el config.js para guradar los config.js y el config.js_vortice nuevos.
 11-11-2025: AEMET 1.2.5.6: pluciag: Se modifica el tddjs.js para poder ver los sondeos con hipatia.
+24-11-2025: AEMET 1.2.5.7: pluciag: Se corrige error en la herramienta hipatia al construir la direccion de cargar las capas.
 
