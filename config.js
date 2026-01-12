@@ -43,6 +43,8 @@ var logo ="./logo_AEMET.png"
 //var server1 = "http://dorsal.aemet.es:8080/adaguc-services/" 
 //Docker
 var server = "https://dorsal.aemet.es/"
+var serverMTG = "https://adaguc_mtg.aemet.es/"
+
 
 var getFeatureInfoApplications = [
   {name:'Time series mode',iconCls:'button_getfeatureinfo',location:'apps/gfiapp_d3c3.html'}
@@ -124,10 +126,10 @@ var dataChooserConfigurationAdd = [
         service:server + '/wms?DATASET=RDT_NOW&',
         layer:'RDT'  
   },{
-    title:'CTTH-FL',
-        thumbnail:server + '/adagucserver?dataset=IMASK&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IMASK_imask_ctth_FL,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
-        service:server + '/adagucserver?dataset=IMASK&',
-        layer:'IMASK_imask_ctth_FL'
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ctth_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CTTH in FL</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CTTH_ctth_hfeet,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CTTH&',
+        layer:'CTTH_ctth_hfeet'
   },{
     title:'ASII-TF',
         thumbnail:server + '/adagucserver?dataset=ASII-TF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-TF_asii_turb_trop_prob,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
@@ -145,7 +147,7 @@ var dataChooserConfigurationAdd = [
         layer:'IMASK_imask'
   },{
     title:'WIND',
-        thumbnail:server + '/adagucserver?dataset=HRW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,windHRW&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        thumbnail:server + '/adagucserver?dataset=HRW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Wind_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
         service:server + '/adagucserver?dataset=HRW&',
         layer:'Wind_pressure'
   },{
@@ -2923,6 +2925,135 @@ var dataChooserConfigurationMSGSAF = [
   }
 ]
 
+//Contenido carpeta MTG-SAF
+var dataChooserConfigurationMTGSAF = [
+ {
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cma_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Cloud Mask</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMA&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMA_cma_cloudsnow,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMA&',
+        layer:'CMA_cma_cloudsnow'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CMA</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CMA&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CMA_cma,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CMA&',
+        layer:'EXIM_CMA_cma'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ct_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Cloud Type</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CT&',
+        layer:'CT_ct'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CT</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CT&',
+        layer:'EXIM_CT_ct'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ctth_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CTTH in FL</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CTTH_ctth_hfeet,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CTTH&',
+        layer:'CTTH_ctth_hfeet'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CTTH</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CTTH_ctth_alti,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CTTH_ctth_alti'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cmic_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMIC&',
+        layer:'CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CTTH</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CTTH_ctth_alti,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CTTH_ctth_alti'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cmic_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMIC&',
+        layer:'CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/crr_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CRR</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CRR&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR_crr_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CRR&',
+        layer:'CRR_crr_intensity'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/crr-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CRRPh</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CRRPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR-Ph_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CRRPh&',
+        layer:'CRR-Ph_crrph_intensity'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=PC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC_pc,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=PC&',
+        layer:'PC_pc'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PCPh</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=PCPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC-Ph_pcph,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=PC-Ph&',
+        layer:'PC-Ph_pcph'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/rdt_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>RDT-CW</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=RDT_NOW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=RDT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/wms?DATASET=RDT_NOW&',
+        layer:'RDT'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ci_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CI</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CI_ci_prob90,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CI&',
+        layer:'CI_ci_prob90'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ishai_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>LIFTED INDEX</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=iSHAI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=iSHAI_IR_band,iSHAI_ishai_li,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=iSHAI&',
+        layer:'iSHAI_ishai_li'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ishai_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>HUMIDITY DIF NWP/MSG</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=iSHAI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=iSHAI_IR_band,iSHAI_ishai_diffml,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=iSHAI&',
+        layer:'iSHAI_ishai_diffml'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/hrw_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>WIND</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=HRW_MTG&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=windHRW,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=HRW_MTG&',
+        layer:'Wind_pressure2'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII TF</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-TF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-TF_asii_turb_trop_prob,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-TF&',
+        layer:'ASII-TF_asii_turb_trop_prob'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII GW IR</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-GW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Gravity_Waves_IR,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-GW&',
+        layer:'Gravity_Waves_IR'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII GW WV</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-GW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Gravity_Waves_WV,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-GW&',
+        layer:'Gravity_Waves_WV'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Liquid ICE ASII</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-ICE&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-ICE_asiiice_sc_mask,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-ICE&',
+        layer:'ASII-ICE_asiiice_sc_mask'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Crystals ICE ASII</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-ICE&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-ICE_asiiice_haic_mask,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-ICE&',
+        layer:'ASII-ICE_asiiice_haic_mask'
+  }
+]
+
+//--------------------------------------------------------------------------------------------------
+
+
+
 
 //Contenido carpeta del menu MSG
 var dataChooserConfigurationFoldersMSG = [
@@ -3006,6 +3137,16 @@ var dataChooserConfigurationFoldersNWP = [
   }
 
 ]
+//-----------------------------------CARPETA MTG ---------------------------------------------------------
+//Contenido carpeta del menu MTG
+var dataChooserConfigurationFoldersMTG = [
+  {
+  title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;NWC SAF MTG Based</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
+  thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+  dataChooserConfiguration: dataChooserConfigurationMTGSAF
+  },
+]
+//-----------------------------------FIN CARPETA MTG -----------------------------------------------------
 
 //Definimos el nombre y contenido de los botones de la toolbar
 var dataChooser =[
@@ -3024,6 +3165,10 @@ var folderChooser =[
  {
    title: "MSG",
    dataChooserConfigurationFolder: dataChooserConfigurationFoldersMSG
+ },
+ {
+   title: "MTG",
+   dataChooserConfigurationFolder: dataChooserConfigurationFoldersMTG
  },
  {
    title: "OBS",
