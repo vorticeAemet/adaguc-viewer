@@ -140,12 +140,14 @@ var hipatia_app = function (element, webmapjs) {
       //html +="  <span class='autowms_app_request_button'>-></span>" +
       html +="</span>";
     //     html+="<span class='autowms_app_currentpath'>Current folder: /"+prevPath[prevPath.length-1]+"</span>";
-    html += "<hr/><span class='autowms_app_currentpath'> Current Data: ./" 
+    //html += "<hr/><span class='autowms_app_currentpath'>Current Data: ./" 
+    html += "<hr/><span class='autowms_app_currentpath'><a href="+'"/adaguc-viewer/hipatia_dw/'+hipatiaURL
     if (!path || path=="" ||  path === "undefined" ){
-      path=hipatiaURL
+      path=""
     } 
-    html +=  path +
+    html +=  path +'">Carpeta: '+hipatiaURL+"</a>"
       "</span>";
+    console.log(html)
     html +=
       '<span class="autowms_app_fileitem_header"><span class="autowms_app_fileitem_return">&#128193;&nbsp;<b>../ (&#8679;)</b></span><span class="autowms_app_fileitem_refresh" name="' +
       path +
