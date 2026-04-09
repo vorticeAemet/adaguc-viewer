@@ -43,4 +43,5 @@ AEMET 1.2.1.1
 24-11-2025: AEMET 1.2.5.7: pluciag: Se corrige error en la herramienta hipatia al construir la direccion de cargar las capas.
 12-01-2025: AEMET 1.2.5.8: Llorenç: Se modifica el config.js para añadir la carpeta MTG y los productos del SAF de MTG
 08-04-2026: AEMET 1.2.5.9: pluciag: Se añade a la herramienta hipatia (hipatia_app.js) un enlace a la carpeta donde estan los datos.
+09-04-2026: AEMET 1.2.6.0: pluciag: Se modifica la herramnienta hipatia (hipatia_app.js) para que ordene alfabeticamente (inverso) los proyectos y el enlace se abra en otra pestaña
 

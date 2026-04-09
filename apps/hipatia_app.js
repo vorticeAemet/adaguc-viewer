@@ -37,6 +37,8 @@ var hipatia_app = function (element, webmapjs) {
       dataType: 'text',
       success: function (data) {
           datalist=data.split("\n")
+	  datalist=datalist.sort()
+	  datalist=datalist.reverse()
           for (var j=0;j<datalist.length;j++){
             if (datalist[j]!=""){  proj_list.push(datalist[j].trim())} 
           } 
@@ -141,11 +143,11 @@ var hipatia_app = function (element, webmapjs) {
       html +="</span>";
     //     html+="<span class='autowms_app_currentpath'>Current folder: /"+prevPath[prevPath.length-1]+"</span>";
     //html += "<hr/><span class='autowms_app_currentpath'>Current Data: ./" 
-    html += "<hr/><span class='autowms_app_currentpath'><a href="+'"/adaguc-viewer/hipatia_dw/'+hipatiaURL
+    html += "<hr/><span class='autowms_app_currentpath'><a href="+'"/adaguc-viewer/hipatia_dw/'+hipatiaURL+'/" target="_blank"'
     if (!path || path=="" ||  path === "undefined" ){
       path=""
     } 
-    html +=  path +'">Carpeta: '+hipatiaURL+"</a>"
+    html +=  '>Carpeta: '+hipatiaURL+"</a>"
       "</span>";
     console.log(html)
     html +=
