@@ -36,9 +36,15 @@ var defaultProjection = {srs:'EPSG:3857',bbox:'-3900000,3000000,3500000,8300000'
 
 var hashLocationNotfiyAddLayer = false;
 
-//var server = "http://dorsal.aemet.es:8080/adaguc-services/" 
+var logo ="./logo_AEMET.png"
+//var logo =""
+//var logo="./calabaza.png"
+
+//var server1 = "http://dorsal.aemet.es:8080/adaguc-services/" 
 //Docker
 var server = "https://dorsal.aemet.es/"
+var serverMTG = "https://adaguc_mtg.aemet.es/"
+
 
 var getFeatureInfoApplications = [
   {name:'Time series mode',iconCls:'button_getfeatureinfo',location:'apps/gfiapp_d3c3.html'}
@@ -73,7 +79,7 @@ var dataChooserConfigurationAdd = [
     title:'LIGHTNING',
     thumbnail:server + '/wms?DATASET=LIGHTNING&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,LIGHTNING_lightningAddLayers&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=LIGHTNING&',
-    layer:'LIGHTNING_lightningTimePeriod',
+    layer:'LIGHTNING',
   },{ 
     title:'METAR',
     thumbnail:server + '/adagucserver?dataset=METAR&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,T_Td_Vis&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
@@ -90,10 +96,10 @@ var dataChooserConfigurationAdd = [
         service:server + '/adagucserver?dataset=CRR&',
         layer:'CRR_crr_intensity'
   },{
-    title:'CRR-Ph',
-        thumbnail:server + '/adagucserver?dataset=CRR-Ph&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR-Ph_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
-        service:server + '/adagucserver?dataset=CRR-Ph&',
-        layer:'CRR-Ph_crrph_intensity'
+    title:'CRRPh',
+        thumbnail:server + '/adagucserver?dataset=CRRPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRRPh_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:server + '/adagucserver?dataset=CRRPh&',
+        layer:'CRRPh_crrph_intensity'
   },{
     title:'PC',
         thumbnail:server + '/adagucserver?dataset=PC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC_pc,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
@@ -120,10 +126,10 @@ var dataChooserConfigurationAdd = [
         service:server + '/wms?DATASET=RDT_NOW&',
         layer:'RDT'  
   },{
-    title:'CTTH-FL',
-        thumbnail:server + '/adagucserver?dataset=IMASK&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IMASK_imask_ctth_FL,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
-        service:server + '/adagucserver?dataset=IMASK&',
-        layer:'IMASK_imask_ctth_FL'
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ctth_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CTTH in FL</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CTTH_ctth_hfeet,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CTTH&',
+        layer:'CTTH_ctth_hfeet'
   },{
     title:'ASII-TF',
         thumbnail:server + '/adagucserver?dataset=ASII-TF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-TF_asii_turb_trop_prob,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
@@ -141,7 +147,7 @@ var dataChooserConfigurationAdd = [
         layer:'IMASK_imask'
   },{
     title:'WIND',
-        thumbnail:server + '/adagucserver?dataset=HRW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,windHRW&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        thumbnail:server + '/adagucserver?dataset=HRW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Wind_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
         service:server + '/adagucserver?dataset=HRW&',
         layer:'Wind_pressure'
   },{
@@ -156,8 +162,8 @@ var dataChooserConfigurationAdd = [
         layer:'EXIM_CT_ct'
   },{
     title:'EMAS',
-    thumbnail:'http://dorsal.aemet.es/adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,multiLayer&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:'http://dorsal.aemet.es/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    thumbnail:'http://oberon.aemet.es/adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,multiLayer&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:'http://oberon.aemet.es/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
     layer:'multiLayer'
   }
   
@@ -169,174 +175,321 @@ var dataChooserConfigurationIRIS = [];
 
 var dataChooserConfigurationECMWF = [
 {
-      title:'PRESSURE SEA LEVEL',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=mean_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Mean sea level pressure',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=mean_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'mean_sea_level_pressure',
       abs:'MEAN SEA LEVEL PRESSURE',
 },{
-      title:'PRESSURE SEA LEVEL Contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=mean_sea_level_pressure_contour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'mean_sea_level_pressure_contour',
-      abs:'MEAN SEA LEVEL PRESSURE Contour in hPa',
-},{
-      title:'GEOPOTENTIAL HEIGHT',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Geopotential height',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'geopotential_height',
       abs:'Geopotential Height in meters ',
 },{
-      title:'TEMPERATURE',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Temperature',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'temperature',
       abs:'Presion Level Temperature',
 },{
-      title:'TEMPERATURE Contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=temperature_contour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'temperature_contour',
-      abs:'Presion Level Temperature Contour in Cent degrees ',
-},{
-      title:'RELATIVE HUMEDITY',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'relative_humidity',
       abs:'Presion Level Relative Humedity',
 },{
-      title:'RELATIVE HUMEDITY Contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity_contour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'relative_humidity_contour',
-      abs:'Presion Level RELATIVE HUMEDITY in Percent',
-},{
-      title:'WIND',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Wind',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'wind',
       abs:'Pressure Level Wind in m/s',
 },{
-      title:'WIND_barb',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_barb,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Wind barbs & vectors',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'wind_barb',
-      abs:'Pressure Level Wind barbs',
+      layer:'wind_barbs_vectors',
+      abs:'Pressure Level Wind barbs & vectors',
 },{
-      title:'WIND_kt',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Wind_kt',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'wind_kt',
       abs:'Pressure Level Wind in Knots',
 },{
-      title:'WIND_vector',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_vector,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'10m Wind',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'wind_vector',
-      abs:'Pressure Level Wind vectors',
+      layer:'10_meter_wind',
+      abs:'10meters Wind in m/s',
 },{
-      title:'10m_WIND',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10m_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'10m Wind barbs & vectors',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'10m_wind',
-      abs:'10meters wind in m/s',
+      layer:'10_meter_wind_barbs_vectors',
+      abs:'10meters Wind barbs & vectors',
 },{
-      title:'10m_WIND_barb',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10m_wind_barb,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'10m Wind_kt',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'10m_wind_barb',
-      abs:'10meters wind barbs',
+      layer:'10_meter_wind_kt',
+      abs:'10meters Wind in Knots',
 },{
-      title:'10m_WIND_kt',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10m_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'10m_wind_kt',
-      abs:'10meters wind in Knots',
-},{
-      title:'10m_WIND_vector',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10m_wind_vector,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'10m_wind_vector',
-      abs:'10meters wind vectors',
-},{
-      title:'2m_Temperature',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'2m Temperature',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'2_meter_temperature',
       abs:'2 meters temperature',
 },{
-      title:'2m_dewpoint_Temperature',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'2m dewpoint Temperature',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'2_meter_dewpoint_temperature',
       abs:'2 meters dewpoint temperature',
 },{
-      title:'2m_dewpoint_Temperature_contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_dewpoint_temperature_contour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
-      service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'2_meter_dewpoint_temperature_contour',
-      abs:'2 meters dewpoint temperature contour',
-},{
-      title:'Composed Cloud Cover',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Composed cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
       layer:'composed_cloud_cover',
       abs:'Composed Cloud Cover',
 },{
-      title:'ATAP CONV ACUM PREC',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation_atap,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'High cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=high_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_accumulated_precipitation_atap',
-      abs:'ATAP Convective Accumulated Prec',
+      layer:'high_cloud_cover',
+      abs:'High Cloud Cover',
 },{
-      title:'ATAP CONV ACUM PREC Contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation_contour_atap,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Medium cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_accumulated_precipitation_contour_atap',
-      abs:'ATAP Convective Accumulated Preci Contour',
+      layer:'medium_cloud_cover',
+      abs:'Medium Cloud Cover',
 },{
-      title:'ECCH CONV ACUM PREC',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation_ecch,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Low cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=low_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_accumulated_precipitation_ecch',
-      abs:'ECCH Convective Accumulated Prec',
+      layer:'low_cloud_cover',
+      abs:'Low Cloud Cover',
 },{
-      title:'ECCH CONV ACUM PREC Contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation_contour_ecch,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Total cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_accumulated_precipitation_contour_ecch',
-      abs:'ECCH Convective Accumulated Preci Contour',
+      layer:'total_cloud_cover',
+      abs:'Total Cloud Cover',
 },{
-      title:'ATAP CONV PREC 6H',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours_atap,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Vertical velocity',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=vertical_velocity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_precipitation_during_last_6_hours_atap',
-      abs:'ATAP Convective Accumulated Prec in last 6 hours',
+      layer:'vertical_velocity',
+      abs:'vertical_velocity',
 },{
-      title:'ATAP CONV PREC 6H contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours_contour_atap,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Convective accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_precipitation_during_last_6_hours_contour_atap',
-      abs:'ATAP Convective Accumulated Prec in last 6 hours contour',
+      layer:'convective_accumulated_precipitation',
+      abs:'Convective Accumulated Precipitation',
 },{
-      title:'ECCH CONV PREC 6H',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours_ecch,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Convective precipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_precipitation_during_last_6_hours_ecch',
-      abs:'ECCH Convective Accumulated Prec in last 6 hours',
+      layer:'convective_precipitation_during_last_6_hours',
+      abs:'Convective Accumulated Precipitation in last 6 hours',
 },{
-      title:'ECCH CONV PREC 6H contour',
-      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours_contour_ecch,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&dim_reference_time=*',
+      title:'Large scale accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=large-scale_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=ECMWF&',
-      layer:'convective_precipitation_during_last_6_hours_contour_ecch',
-      abs:'ECCH Convective Accumulated Prec in last 6 hours contour',
+      layer:'large-scale_accumulated_precipitation',
+      abs:'Large Scale Accumulated Precipitation',
+},{
+      title:'Large scale accumulated predipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=large-scale_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF&',
+      layer:'large-scale_precipitation_during_last_6_hours',
+      abs:'Large Scale Accumulated Precipitation in last 6 hours',
+},{
+      title:'Total accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF&',
+      layer:'total_accumulated_precipitation',
+      abs:'Total Acumulated Precipitation',
+},{
+      title:'Total accumulated precipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF&',
+      layer:'total_precipitation_during_last_6_hours',
+      abs:'Total Acumulated Precipitation in last 6 hours',
 }
 
 ];
 
-var dataChooserConfigurationECMWFHRES = [];
+var dataChooserConfigurationECMWFHRES = [
+{
+      title:'Mean sea level pressure',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=mean_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'mean_sea_level_pressure',
+      abs:'MEAN SEA LEVEL PRESSURE',
+},{
+      title:'Geopotential height',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'geopotential_height',
+      abs:'Geopotential Height in meters ',
+},{
+      title:'Temperature', thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'temperature',
+      abs:'Presion Level Temperature',
+},{
+      title:'Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'relative_humidity',
+      abs:'Presion Level Relative Humedity',
+},{
+      title:'Wind',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'wind',
+      abs:'Pressure Level Wind in m/s',
+},{
+      title:'Wind barbs & vectors',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'wind_barbs_vectors',
+      abs:'Pressure Level Wind barbs & vectors',
+},{
+      title:'Wind_kt',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'wind_kt',
+      abs:'Pressure Level Wind in Knots',
+},{
+      title:'10m Wind',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'10_meter_wind',
+      abs:'10meters Wind in m/s',
+},{
+      title:'10m Wind barbs & vectors',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'10_meter_wind_barbs_vectors',
+      abs:'10meters Wind barbs & vectors',
+},{
+      title:'10m Wind_kt',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'10_meter_wind_kt',
+      abs:'10meters wind in Knots',
+},{
+      title:'Maximum 10m gust during last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_gust_during_last_6_hours_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'10_meter_wind_gust_during_last_6_hours_kt',
+      abs:'10m wind gust during last 6 hours kt',
+},{
+      title:'2m Temperature',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'2_meter_temperature',
+      abs:'2 meters temperature',
+},{
+      title:'2m dewpoint Temperature',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'2_meter_dewpoint_temperature',
+      abs:'2 meters dewpoint temperature',
+},{
+      title:'Minimum Temperature 2m in last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_min_temperature_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'2_meter_min_temperature_during_last_6_hours',
+      abs:'2 meter min temperature during last 6 hours',
+},{
+      title:'Maximum Temperature 2m in last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2_meter_max_temperature_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'2_meter_max_temperature_during_last_6_hours',
+      abs:'2 meter max temperature during last 6 hours',
+},{
+      title:'Composed cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'composed_cloud_cover',
+      abs:'Composed Cloud Cover',
+},{
+      title:'High cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=high_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'high_cloud_cover',
+      abs:'High Cloud Cover',
+},{
+      title:'Medium cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'medium_cloud_cover',
+      abs:'Medium Cloud Cover',
+},{
+      title:'Low cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=low_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'low_cloud_cover',
+      abs:'Low Cloud Cover',
+},{
+      title:'Total cloud cover',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'total_cloud_cover',
+      abs:'Total Cloud Cover',
+},{
+      title:'Vertical velocity',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=vertical_velocity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'vertical_velocity',
+      abs:'vertical_velocity',
+},{
+      title:'Convective accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'convective_accumulated_precipitation',
+      abs:'Convective Accumulated Precipitation',
+},{
+      title:'Convective precipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=convective_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'convective_precipitation_during_last_6_hours',
+      abs:'Convective Accumulated Precipitation in last 6 hours',
+},{
+      title:'Large scale accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=large-scale_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'large-scale_accumulated_precipitation',
+      abs:'Large Scale Accumulated Precipitation',
+},{
+      title:'Large scale accumulated predipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=large-scale_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'large-scale_precipitation_during_last_6_hours',
+      abs:'Large Scale Accumulated Precipitation in last 6 hours',
+},{
+      title:'Total accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'total_accumulated_precipitation',
+      abs:'Total Acumulated Precipitation',
+},{
+      title:'Total accumulated precipitation last 6H',
+      thumbnail:server + '/adagucserver?dataset=ECMWF-HRES&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_6_hours,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=ECMWF-HRES&',
+      layer:'total_precipitation_during_last_6_hours',
+      abs:'Total Acumulated Precipitation in last 6 hours',
+}
 
-var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
+];
+
+var dataChooserConfigurationNWP = [
+      {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Ceiling_Ground_IFS_HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&',
       layer:'Ceiling_Ground_IFS_HRES_00'
@@ -352,11 +505,13 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Medium_Clouds_IFS_HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&',
       layer:'Medium_Clouds_IFS_HRES_00'
-},{title:'IR108_00',
+},
+/*{title:'IR108_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108_IFS_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&',
       layer:'IR108_IFS_00'
-},{title:'Enhanced_IR108_00',
+},
+{title:'Enhanced_IR108_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Enhanced_IR108_IFS_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&',
       layer:'Enhanced_IR108_IFS_00'
@@ -364,7 +519,8 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV62_IFS_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&',
       layer:'WV62_IFS_00'
-},{title:'Boundary_Layer_Height_00',
+},*/
+{title:'Boundary_Layer_Height_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Boundary_Layer_Height_IFS-HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'Boundary_Layer_Height_IFS-HRES_00'
@@ -372,7 +528,7 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=SFC_TURB_IFS-HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'SFC_TURB_IFS-HRES_00'
-},{title:'TI1_00',
+},/*{title:'TI1_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=TI1_IFS-HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'TI1_IFS-HRES_00'
@@ -380,7 +536,8 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=TI2_IFS-HRES_00,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'TI2_IFS-HRES_00'
-},{title:'Ceiling_ground_12',
+},*/
+{title:'Ceiling_ground_12',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Ceiling_Ground_IFS_HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&',
       layer:'Ceiling_Ground_IFS_HRES_12'
@@ -396,7 +553,8 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Medium_Clouds_IFS_HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Cloudiness&',
       layer:'Medium_Clouds_IFS_HRES_12'
-},{title:'IR108_12',
+},
+/*{title:'IR108_12',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108_IFS_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&',
       layer:'IR108_IFS_12'
@@ -408,7 +566,8 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV62_IFS_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Pseudoimages&',
       layer:'WV62_IFS_12'
-},{title:'Boundary_Layer_Height_12',
+},*/
+{title:'Boundary_Layer_Height_12',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Boundary_Layer_Height_IFS-HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'Boundary_Layer_Height_IFS-HRES_12'
@@ -416,7 +575,8 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=SFC_TURB_IFS-HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'SFC_TURB_IFS-HRES_12'
-},{title:'TI1_12',
+},
+/*{title:'TI1_12',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=TI1_IFS-HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'TI1_IFS-HRES_12'
@@ -424,7 +584,186 @@ var dataChooserConfigurationNWP = [ {title:'Ceiling_ground_00',
       thumbnail:server + '/adagucserver?dataset=IFS-HRES_Turbulence&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=TI2_IFS-HRES_12,overlay&WIDTH=412&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=IFS-HRES_Turbulence&',
       layer:'TI2_IFS-HRES_12'
-}];
+}*/
+];
+
+var dataChooserConfigurationHARMONIE_AIB = [
+{
+      title:'Medium sea level pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'medium_sea_level_pressure',
+      abs:'MEDIUM SEA LEVEL PRESSURE',
+},{
+      title:'10m Wind B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_wind_barbs_vectors',
+      abs:'10 meter wind last hour (Barbs/Vectors)',
+
+},{
+      title:'10m Wind Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_wind_kt',
+      abs:'10 meter wind last hour (Knots)',
+
+},{
+      title:'10m Wind m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_wind',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'10m MaxGust B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_max_gust_during_last_hour_barbs_vectors',
+      abs:'10 meter max gust last hour (Barbs/Vectors)',
+
+},{
+      title:'10m MaxGust Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_max_gust_during_last_hour_kt',
+      abs:'10 meter max gust last hour (Knots)',
+
+},{
+      title:'10m MaxGust m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_ms,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'10_meter_max_gust_during_last_hour_ms',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'Total precipitation 1h',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'total_precipitation_during_last_hour',
+      abs:'Total precipitation during last hour',
+
+},
+]
+var dataChooserConfigurationHARMONIE_AIC = [
+{
+      title:'Medium sea level pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,32,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'medium_sea_level_pressure',
+      abs:'MEDIUM SEA LEVEL PRESSURE',
+},{
+      title:'10m Wind B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_wind_barbs_vectors',
+      abs:'10 meter max gust last hour (Barbs/Vectors)',
+
+},{
+      title:'10m Wind Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_wind_kt',
+      abs:'10 meter max gust last hour (Knots)',
+
+},{
+      title:'10m Wind m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_wind',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'10m MaxGust B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_max_gust_during_last_hour_barbs_vectors',
+      abs:'10 meter max gust last hour (Barbs/Vectors)',
+
+},{
+      title:'10m MaxGust Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_max_gust_during_last_hour_kt',
+      abs:'10 meter max gust last hour (Knots)',
+
+},{
+      title:'10m MaxGust m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_ms,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'10_meter_max_gust_during_last_hour_ms',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'Total precipitation 1h',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'total_precipitation_during_last_hour',
+      abs:'Total precipitation during last hour',
+
+},
+]
+
+var dataChooserConfigurationHARMONIE_AIN = [
+{
+      title:'Medium sea level pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_sea_level_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'medium_sea_level_pressure',
+      abs:'MEDIUM SEA LEVEL PRESSURE',
+      
+},{
+      title:'10m Wind B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_wind_barbs_vectors',
+      abs:'10 meter wind last hour (Barbs/Vectors)',
+
+},{
+      title:'10m Wind Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_wind_kt',
+      abs:'10 meter wind last hour (Knots)',
+
+},{
+      title:'10m Wind m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_wind',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'10m MaxGust B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_max_gust_during_last_hour_barbs_vectors',
+      abs:'10 meter max gust last hour (Barbs/Vectors)',
+
+},{
+      title:'10m MaxGust Kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_max_gust_during_last_hour_kt',
+      abs:'10 meter max gust last hour (Knots)',
+
+},{
+      title:'10m MaxGust m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_ms,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'10_meter_max_gust_during_last_hour_ms',
+      abs:'10 meter max gust last hour (m/s)',
+
+},{
+      title:'Total precipitation 1h',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'total_precipitation_during_last_hour',
+      abs:'Total precipitation during last hour',
+
+},
+]
+
 
 //----------------------------------- CARPETA OBS -----------------------------------------------------
 //CONTENIDO de subcarpeta Sondeo
@@ -435,131 +774,31 @@ var dataChooserConfigurationTEMP = [
     service:server + 'adagucserver?dataset=TEMP-LXXX&&service=WMS&request=GetCapabilities',
     abs:'TEMP-LXXX',
     layer:'station_name'
-  },{
-    title:'Europa-Norte',
-    thumbnail:server + 'adagucserver?dataset=TEMP-EXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-10,61,35&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-EXXX&&service=WMS&request=GetCapabilities',
-    abs:'TEMP-EXXX',
-    layer:'station_name'
-  },{
-    title:'Hungria',
-    thumbnail:server + 'adagucserver?dataset=TEMP-HXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-15,0,71,65&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-HXXX&&service=WMS&request=GetCapabilities',
-    abs:'TEMP-HXXX',
-    layer:'station_name'
-  },{
-    title:'Canada',
-    thumbnail:server + 'adagucserver?dataset=TEMP-CXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=40,-140,85,-55&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-CXXX&&service=WMS&request=GetCapabilities',
-    abs:'TEMP-CXXX',
-    layer:'station_name'
-  },{
-    title:'EEUU',
-    thumbnail:server + 'adagucserver?dataset=TEMP-KXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=05,-130,61,-65&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-KXXX&&service=WMS&request=GetCapabilities',
-    abs:'TEMP-KXXX',
-    layer:'station_name'
-  },{
-    title:'Mexico',
-    thumbnail:server + 'adagucserver?dataset=TEMP-MXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=05,-120,61,-65&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-MXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-MXXX'
-  },{
-    title:'Australia-Antartida',
-    thumbnail:server + 'adagucserver?dataset=TEMP-AXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-75,40,-01,200&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-AXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-AXXX'
-  },{
-    title:'China',
-    thumbnail:server + 'adagucserver?dataset=TEMP-BXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,72,55,135&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-BXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-BXXX'
-  },{
-    title:'Sudafrica',
-    thumbnail:server + 'adagucserver?dataset=TEMP-FXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-37,10,5,60&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-FXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-FXXX'
-  },{
-    title:'Pacifico',
-    thumbnail:server + 'adagucserver?dataset=TEMP-NXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-NXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-NXXX'
-  },{
-    title:'Oriente Medio',
-    thumbnail:server + 'adagucserver?dataset=TEMP-OXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-OXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-OXXX'
-  },{
-    title:'USA-Pacifico',
-    thumbnail:server + 'adagucserver?dataset=TEMP-PXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-PXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-PXXX'
-  },{
-    title:'Rusia-Corea-Japon',
-    thumbnail:server + 'adagucserver?dataset=TEMP-RXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-RXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-RXXX'
-  },{
-    title:'Guayana-Polonia',
-    thumbnail:server + 'adagucserver?dataset=TEMP-SXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-SXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-SXXX'
-  },{
-    title:'Caribe-Guadalupe',
-    thumbnail:server + 'adagucserver?dataset=TEMP-TXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-TXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-TXXX'
-  },{
-    title:'Bielorusia-Letonia',
-    thumbnail:server + 'adagucserver?dataset=TEMP-UXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-UXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-UXXX'
-  },{
-    title:'Vietnam',
-    thumbnail:server + 'adagucserver?dataset=TEMP-VXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-VXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-VXXX'
-  },{
-    title:'Extremo-Oriente',
-    thumbnail:server + 'adagucserver?dataset=TEMP-WXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-40,90,15,150&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-WXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-WXXX'
-  },{
-    title:'Rumania-Bucarest',
-    thumbnail:server + 'adagucserver?dataset=TEMP-YXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-YXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-YXXX'
-  },{
-    title:'Africa-India',
-    thumbnail:server + 'adagucserver?dataset=TEMP-DXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-DXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-DXXX'
-  },{
-    title:'Marruecos',
-    thumbnail:server + 'adagucserver?dataset=TEMP-GXXX&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,station_name&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=-90,-180,90,180&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + 'adagucserver?dataset=TEMP-GXXX&&service=WMS&request=GetCapabilities',
-    layer:'station_name',
-    abs:'TEMP-GXXX'
   }
-
-
 ]
 
+//Contenido de OBS ALTURA.
+var dataChooserConfigurationMAND = [
+  {
+    title:'Temperature',
+    thumbnail:server + 'adagucserver?dataset=SOND&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Temperature&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,61,25&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + 'adagucserver?dataset=SOND&&service=WMS&request=GetCapabilities',
+    abs:'Temperature',
+    layer:'Temperature'
+  },{
+    title:'Z Geopotencial',
+    thumbnail:server + 'adagucserver?dataset=SOND&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Z&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,61,25&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + 'adagucserver?dataset=SOND&&service=WMS&request=GetCapabilities',
+    abs:'Altura del Geopotencial',
+    layer:'Z'
+  }//,{
+   // title:'Viento',
+   // thumbnail:server + 'adagucserver?dataset=SOND&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Wind&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,61,25&FORMAT=image/png&TRANSPARENT=TRUE&',
+   // service:server + 'adagucserver?dataset=SOND&&service=WMS&request=GetCapabilities',
+   // abs:'Barbas de viento',
+   // layer:'Wind'
+  //}
+]
 //Contenido de subcarpeta TAJO
 var dataChooserConfigurationTAJO = [
   {
@@ -717,6 +956,60 @@ var dataChooserConfigurationAEMET = [
 
 ]
 
+//Contenido subcarpeta VISOR
+var dataChooserConfigurationVISOR = [
+    {
+    title:'PREC_ACUM_10m',
+    abs: "Precipitacion Acumulada en 10 minutos",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Prec_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'Prec_V'
+    },{
+    title:'PREC_ACUM_1H',
+    abs: "Precipitacion Acumulada en 1 Hora",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,P1H_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'P1H_V'
+    },{
+    title:'PREC_ACUM_3H',
+    abs: "Precipitacion Acumulada en 3 Horas",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,P3H_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'P3H_V'
+    },{
+    title:'PREC_ACUM_6H',
+    abs: "Precipitacion Acumulada en 6 Horas",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,P6H_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'P6H_V'
+    },{
+    title:'PREC_ACUM_12H',
+    abs: "Precipitacion Acumulada en 12 Horas",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,P12H_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'P12H_V'
+    },{
+    title:'PREC_ACUM_24H',
+    abs: "Precipitacion Acumulada en 24 Horas",
+    thumbnail:server + 'adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,P24H_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'P24H_V'
+    },{
+    title:'VIENTO',
+    abs: "Viento medio 10m",
+    thumbnail:server + '/adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Wind_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'Wind_V'
+    },{
+    title:'Temperatura',
+    thumbnail:server + '/adagucserver?dataset=EMAS&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,Temp_V&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=EMAS&&service=WMS&request=GetCapabilities',
+    layer:'Temp_V'
+    }
+
+]
+
+
 //Contenido subcarpeta METAR
 var dataChooserConfigurationMETAR = [
   {
@@ -761,6 +1054,11 @@ var dataChooserConfigurationBOYAS_E = [
 
 //Contenido carpeta del menu OBS
 var dataChooserConfigurationFoldersOBS = [
+  { title:"VISOR",
+    thumbnail:'./img/open-file-folder.png',
+    abs:"Estaciones Automaticas de la aplicación VISOR",
+    dataChooserConfiguration: dataChooserConfigurationVISOR
+  },
   {
     title:"AEMET",
     thumbnail:'./img/open-file-folder.png',
@@ -789,6 +1087,11 @@ var dataChooserConfigurationFoldersOBS = [
     title:"SONDEOS",
     thumbnail:'./img/open-file-folder.png',
     dataChooserConfiguration: dataChooserConfigurationTEMP
+  },{
+    title:"OBS ALTURA",
+    abs:"T,Z,humedad y viento en niveles mandatory de sondeos",
+    thumbnail:'./img/open-file-folder.png',
+    dataChooserConfiguration: dataChooserConfigurationMAND
   }
 
 ];
@@ -803,29 +1106,41 @@ var dataChooserConfigurationRAY = [
 title:'RAYOS',
     thumbnail:server + '/wms?DATASET=LIGHTNING&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,LIGHTNING_lightningAddLayers&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=LIGHTNING&',
-    layer:'LIGHTNING_lightningTimePeriod',
+    layer:'LIGHTNING',
   }
 ]
 
 //Contenido de la subcarpeta PPI
 var dataChooserConfigurationPPI = [
   {
-    title:'PPI-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_ALM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPI-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_ALM_mask',
+    layer:'irisPPI_AHR_mask',
   },
   {
-    title:'PPI-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_BAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPI-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_BAD_mask',
+    layer:'irisPPI_AMG_mask',
   },
   {
-    title:'PPI-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_BAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPI-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_BAR_mask',
+    layer:'irisPPI_ATN_mask',
+  },
+  {
+    title:'PPI-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_BNV_mask',
+  },
+  {
+    title:'PPI-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_CLG_mask',
   },
   {
     title:'PPI-COR',
@@ -834,28 +1149,40 @@ var dataChooserConfigurationPPI = [
     layer:'irisPPI_COR_mask',
   },
   {
+    title:'PPI-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_GLD_mask',
+  },
+  {
+    title:'PPI-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_GRM_mask',
+  },
+  {
     title:'PPI-LID',
     thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
     layer:'irisPPI_LID_mask',
   },
   {
-    title:'PPI-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_MAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_MAD_mask',
-  },
-  {
-    title:'PPI-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_MAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_MAL_mask',
-  },
-  {
     title:'PPI-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_MUR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
     layer:'irisPPI_MUR_mask',
+  },
+  {
+    title:'PPI-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_NJR_mask',
+  },
+  {
+    title:'PPI-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_PDG_mask',
   },
   {
     title:'PPI-PMA',
@@ -870,10 +1197,10 @@ var dataChooserConfigurationPPI = [
     layer:'irisPPI_SAN_mask',
   },
   {
-    title:'PPI-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_SEV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPI-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_SEV_mask',
+    layer:'irisPPI_SFT_mask',
   },
   {
     title:'PPI-SSE',
@@ -882,22 +1209,16 @@ var dataChooserConfigurationPPI = [
     layer:'irisPPI_SSE_mask',
   },
   {
+    title:'PPI-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPI&',
+    layer:'irisPPI_TJV_mask',
+  },
+  {
     title:'PPI-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPI&',
     layer:'irisPPI_VAL_mask',
-  },
-  {
-    title:'PPI-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_ZAR_mask',
-  },
-  {
-    title:'PPI-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-PPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPI_LPA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPI&',
-    layer:'irisPPI_LPA_mask',
   },
   {
     title:'PPI-COMP-NAC',
@@ -908,26 +1229,149 @@ var dataChooserConfigurationPPI = [
 
 
 ]
+//contenido de la subcarpeta CAPPI
+var dataChooserConfigurationCAPPI = [
+  {
+    title:'CAPPI-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_AHR_mask',
+  },
+  {
+    title:'CAPPI-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_AMG_mask',
+  },
+  {
+    title:'CAPPI-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_ATN_mask',
+  },
+  {
+    title:'CAPPI-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_BNV_mask',
+  },
+  {
+    title:'CAPPI-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_CLG_mask',
+  },
+  {
+    title:'CAPPI-COR',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_COR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_COR_mask',
+  },
+  {
+    title:'CAPPI-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_GLD_mask',
+  },
+  {
+    title:'CAPPI-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_GRM_mask',
+  },
+  {
+    title:'CAPPI-LID',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_LID_mask',
+  },
+  {
+    title:'CAPPI-MUR',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_MUR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_MUR_mask',
+  },
+  {
+    title:'CAPPI-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_NJR_mask',
+  },
+  {
+    title:'CAPPI-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_PDG_mask',
+  },
+  {
+    title:'CAPPI-PMA',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_PMA_mask',
+  },
+  {
+    title:'CAPPI-SAN',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_SAN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_SAN_mask',
+  },
+  {
+    title:'CAPPI-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_SFT_mask',
+  },
+  {
+    title:'CAPPI-SSE',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_SSE_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_SSE_mask',
+  },
+  {
+    title:'CAPPI-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_TJV_mask',
+  },
+  {
+    title:'CAPPI-VAL',
+    thumbnail:server + '/wms?DATASET=IRIS-CAPPI&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisCAPPI_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-CAPPI&',
+    layer:'irisCAPPI_VAL_mask',
+  }
+]
 
 //contenido de la subcarpeta ECHO-TOP
 var dataChooserConfigurationTOPS = [
-   {
-    title:'TOPS-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_ALM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+  {
+    title:'TOPS-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_ALM_mask',
+    layer:'irisTOPS_AHR_mask',
   },
   {
-    title:'TOPS-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_BAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'TOPS-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_BAD_mask',
+    layer:'irisTOPS_AMG_mask',
   },
   {
-    title:'TOPS-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_BAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'TOPS-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_BAR_mask',
+    layer:'irisTOPS_ATN_mask',
+  },
+  {
+    title:'TOPS-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_BNV_mask',
+  },
+  {
+    title:'TOPS-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_CLG_mask',
   },
   {
     title:'TOPS-COR',
@@ -936,22 +1380,22 @@ var dataChooserConfigurationTOPS = [
     layer:'irisTOPS_COR_mask',
   },
   {
+    title:'TOPS-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_GLD_mask',
+  },
+  {
+    title:'TOPS-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_GRM_mask',
+  },
+  {
     title:'TOPS-LID',
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
     layer:'irisTOPS_LID_mask',
-  },
-  {
-    title:'TOPS-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_MAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_MAD_mask',
-  },
-  {
-    title:'TOPS-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_MAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_MAL_mask',
   },
   {
     title:'TOPS-MUR',
@@ -960,22 +1404,34 @@ var dataChooserConfigurationTOPS = [
     layer:'irisTOPS_MUR_mask',
   },
   {
+    title:'TOPS-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_NJR_mask',
+  },
+  {
+    title:'TOPS-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_PDG_mask',
+  },
+  {
     title:'TOPS-PMA',
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_PMA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
     layer:'irisTOPS_PMA_mask',
   },
-   {
+  {
     title:'TOPS-SAN',
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_SAN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
     layer:'irisTOPS_SAN_mask',
   },
   {
-    title:'TOPS-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_SEV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'TOPS-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_SEV_mask',
+    layer:'irisTOPS_SFT_mask',
   },
   {
     title:'TOPS-SSE',
@@ -984,22 +1440,16 @@ var dataChooserConfigurationTOPS = [
     layer:'irisTOPS_SSE_mask',
   },
   {
+    title:'TOPS-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-TOPS&',
+    layer:'irisTOPS_TJV_mask',
+  },
+  {
     title:'TOPS-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-TOPS&',
     layer:'irisTOPS_VAL_mask',
-  },
-  {
-    title:'TOPS-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_ZAR_mask',
-  },
-  {
-    title:'TOPS-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-TOPS&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisTOPS_LPA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-TOPS&',
-    layer:'irisTOPS_LPA_mask',
   },
   {
     title:'TOPS-COM-NAC',
@@ -1012,22 +1462,34 @@ var dataChooserConfigurationTOPS = [
 //contenido carpeta ACUM1H
 var dataChooserConfigurationAC1H = [
   {
-    title:'ACUM1H-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_ALM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM1H-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_AHR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_ALM_fullRange',
+    layer:'irisACUM1H_AHR_fullRange',
   },
   {
-    title:'ACUM1H-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_BAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM1H-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_AMG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_BAD_fullRange',
+    layer:'irisACUM1H_AMG_fullRange',
   },
   {
-    title:'ACUM1H-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_BAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM1H-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_ATN_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_BAR_fullRange',
+    layer:'irisACUM1H_ATN_fullRange',
+  },
+  {
+    title:'ACUM1H-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_BNV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_BNV_fullRange',
+  },
+  {
+    title:'ACUM1H-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_CLG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_CLG_fullRange',
   },
   {
     title:'ACUM1H-COR',
@@ -1036,28 +1498,40 @@ var dataChooserConfigurationAC1H = [
     layer:'irisACUM1H_COR_fullRange',
   },
   {
+    title:'ACUM1H-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_GLD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_GLD_fullRange',
+  },
+  {
+    title:'ACUM1H-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_GRM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_GRM_fullRange',
+  },
+  {
     title:'ACUM1H-LID',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_LID_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
     layer:'irisACUM1H_LID_fullRange',
   },
   {
-    title:'ACUM1H-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_MAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_MAD_fullRange',
-  },
-  {
-    title:'ACUM1H-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_MAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_MAL_fullRange',
-  },
-  {
     title:'ACUM1H-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_MUR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
     layer:'irisACUM1H_MUR_fullRange',
+  },
+  {
+    title:'ACUM1H-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_NJR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_NJR_fullRange',
+  },
+  {
+    title:'ACUM1H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_PDG_fullRange',
   },
   {
     title:'ACUM1H-PMA',
@@ -1072,10 +1546,10 @@ var dataChooserConfigurationAC1H = [
     layer:'irisACUM1H_SAN_fullRange',
   },
   {
-    title:'ACUM1H-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_SEV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM1H-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_SFT_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_SEV_fullRange',
+    layer:'irisACUM1H_SFT_fullRange',
   },
   {
     title:'ACUM1H-SSE',
@@ -1084,22 +1558,16 @@ var dataChooserConfigurationAC1H = [
     layer:'irisACUM1H_SSE_fullRange',
   },
   {
+    title:'ACUM1H-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_TJV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
+    layer:'irisACUM1H_TJV_fullRange',
+  },
+  {
     title:'ACUM1H-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
     layer:'irisACUM1H_VAL_fullRange',
-  },
-  {
-    title:'ACUM1H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_ZAR_fullRange',
-  },
-  {
-    title:'ACUM1H-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM1H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM1H_LPA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM1H&',
-    layer:'irisACUM1H_LPA_fullRange',
   },
   {
     title:'ACUM1H-COMP-NAC',
@@ -1113,22 +1581,34 @@ var dataChooserConfigurationAC1H = [
 //contenido carpeta ACUM6H
 var dataChooserConfigurationAC6H = [
   {
-    title:'ACUM6H-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_ALM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM6H-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_AHR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_ALM_fullRange',
+    layer:'irisACUM6H_AHR_fullRange',
   },
   {
-    title:'ACUM6H-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_BAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM6H-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_AMG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_BAD_fullRange',
+    layer:'irisACUM6H_AMG_fullRange',
   },
   {
-    title:'ACUM6H-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_BAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM6H-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_ATN_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_BAR_fullRange',
+    layer:'irisACUM6H_ATN_fullRange',
+  },
+  {
+    title:'ACUM6H-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_BNV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_BNV_fullRange',
+  },
+  {
+    title:'ACUM6H-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_CLG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_CLG_fullRange',
   },
   {
     title:'ACUM6H-COR',
@@ -1137,28 +1617,40 @@ var dataChooserConfigurationAC6H = [
     layer:'irisACUM6H_COR_fullRange',
   },
   {
+    title:'ACUM6H-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_GLD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_GLD_fullRange',
+  },
+  {
+    title:'ACUM6H-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_GRM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_GRM_fullRange',
+  },
+  {
     title:'ACUM6H-LID',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_LID_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
     layer:'irisACUM6H_LID_fullRange',
   },
   {
-    title:'ACUM6H-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_MAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_MAD_fullRange',
-  },
-  {
-    title:'ACUM6H-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_MAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_MAL_fullRange',
-  },
-  {
     title:'ACUM6H-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_MUR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
     layer:'irisACUM6H_MUR_fullRange',
+  },
+  {
+    title:'ACUM6H-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_NJR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_NJR_fullRange',
+  },
+  {
+    title:'ACUM6H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_PDG_fullRange',
   },
   {
     title:'ACUM6H-PMA',
@@ -1173,10 +1665,10 @@ var dataChooserConfigurationAC6H = [
     layer:'irisACUM6H_SAN_fullRange',
   },
   {
-    title:'ACUM6H-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_SEV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM6H-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_SFT_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_SEV_fullRange',
+    layer:'irisACUM6H_SFT_fullRange',
   },
   {
     title:'ACUM6H-SSE',
@@ -1185,22 +1677,16 @@ var dataChooserConfigurationAC6H = [
     layer:'irisACUM6H_SSE_fullRange',
   },
   {
+    title:'ACUM6H-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_TJV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
+    layer:'irisACUM6H_TJV_fullRange',
+  },
+  {
     title:'ACUM6H-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
     layer:'irisACUM6H_VAL_fullRange',
-  },
-  {
-    title:'ACUM6H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_ZAR_fullRange',
-  },
-  {
-    title:'ACUM6H-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM6H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM6H_LPA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM6H&',
-    layer:'irisACUM6H_LPA_fullRange',
   },
   {
     title:'ACUM6H-COMP-NAC',
@@ -1214,22 +1700,34 @@ var dataChooserConfigurationAC6H = [
 //contenido carpeta ACUM24H
 var dataChooserConfigurationAC24H = [
   {
-    title:'ACUM24H-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_ALM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM24H-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_AHR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_ALM_fullRange',
+    layer:'irisACUM24H_AHR_fullRange',
   },
   {
-    title:'ACUM24H-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_BAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM24H-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_AMG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_BAD_fullRange',
+    layer:'irisACUM24H_AMG_fullRange',
   },
   {
-    title:'ACUM24H-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_BAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM24H-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_ATN_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_BAR_fullRange',
+    layer:'irisACUM24H_ATN_fullRange',
+  },
+  {
+    title:'ACUM24H-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_BNV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_BNV_fullRange',
+  },
+  {
+    title:'ACUM24H-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_CLG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_CLG_fullRange',
   },
   {
     title:'ACUM24H-COR',
@@ -1238,28 +1736,40 @@ var dataChooserConfigurationAC24H = [
     layer:'irisACUM24H_COR_fullRange',
   },
   {
+    title:'ACUM24H-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_GLD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_GLD_fullRange',
+  },
+  {
+    title:'ACUM24H-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_GRM_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_GRM_fullRange',
+  },
+  {
     title:'ACUM24H-LID',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_LID_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
     layer:'irisACUM24H_LID_fullRange',
   },
   {
-    title:'ACUM24H-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_MAD_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_MAD_fullRange',
-  },
-  {
-    title:'ACUM24H-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_MAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_MAL_fullRange',
-  },
-  {
     title:'ACUM24H-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_MUR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
     layer:'irisACUM24H_MUR_fullRange',
+  },
+  {
+    title:'ACUM24H-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_NJR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_NJR_fullRange',
+  },
+  {
+    title:'ACUM24H-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_PDG_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_PDG_fullRange',
   },
   {
     title:'ACUM24H-PMA',
@@ -1274,10 +1784,10 @@ var dataChooserConfigurationAC24H = [
     layer:'irisACUM24H_SAN_fullRange',
   },
   {
-    title:'ACUM24H-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_SEV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'ACUM24H-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_SFT_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_SEV_fullRange',
+    layer:'irisACUM24H_SFT_fullRange',
   },
   {
     title:'ACUM24H-SSE',
@@ -1286,22 +1796,16 @@ var dataChooserConfigurationAC24H = [
     layer:'irisACUM24H_SSE_fullRange',
   },
   {
+    title:'ACUM24H-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_TJV_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
+    layer:'irisACUM24H_TJV_fullRange',
+  },
+  {
     title:'ACUM24H-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_VAL_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
     layer:'irisACUM24H_VAL_fullRange',
-  },
-  {
-    title:'ACUM24H-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_ZAR_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_ZAR_fullRange',
-  },
-  {
-    title:'ACUM24H-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-ACUM24H&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisACUM24H_LPA_fullRange&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-ACUM24H&',
-    layer:'irisACUM24H_LPA_fullRange',
   },
   {
     title:'ACUM24H-COMP-NAC',
@@ -1316,22 +1820,34 @@ var dataChooserConfigurationAC24H = [
 //contenido carpeta VIL
 var dataChooserConfigurationVIL = [
   {
-    title:'VIL-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_ALM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'VIL-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_ALM_mask',
+    layer:'irisVIL_AHR_mask',
   },
   {
-    title:'VIL-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_BAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'VIL-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_BAD_mask',
+    layer:'irisVIL_AMG_mask',
   },
   {
-    title:'VIL-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_BAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'VIL-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_BAR_mask',
+    layer:'irisVIL_ATN_mask',
+  },
+  {
+    title:'VIL-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_BNV_mask',
+  },
+  {
+    title:'VIL-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_CLG_mask',
   },
   {
     title:'VIL-COR',
@@ -1339,29 +1855,41 @@ var dataChooserConfigurationVIL = [
     service:server + '/adagucserver?dataset=IRIS-VIL&',
     layer:'irisVIL_COR_mask',
   },
-   {
+  {
+    title:'VIL-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_GLD_mask',
+  },
+  {
+    title:'VIL-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_GRM_mask',
+  },
+  {
     title:'VIL-LID',
     thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
     layer:'irisVIL_LID_mask',
   },
   {
-    title:'VIL-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_MAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_MAD_mask',
-  },
-  {
-    title:'VIL-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_MAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_MAL_mask',
-  },
-  {
     title:'VIL-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_MUR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
     layer:'irisVIL_MUR_mask',
+  },
+  {
+    title:'VIL-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_NJR_mask',
+  },
+  {
+    title:'VIL-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_PDG_mask',
   },
   {
     title:'VIL-PMA',
@@ -1376,10 +1904,10 @@ var dataChooserConfigurationVIL = [
     layer:'irisVIL_SAN_mask',
   },
   {
-    title:'VIL-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_SEV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'VIL-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_SEV_mask',
+    layer:'irisVIL_SFT_mask',
   },
   {
     title:'VIL-SSE',
@@ -1388,22 +1916,16 @@ var dataChooserConfigurationVIL = [
     layer:'irisVIL_SSE_mask',
   },
   {
+    title:'VIL-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-VIL&',
+    layer:'irisVIL_TJV_mask',
+  },
+  {
     title:'VIL-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-VIL&',
     layer:'irisVIL_VAL_mask',
-  },
-  {
-    title:'VIL-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_ZAR_mask',
-  },
-  {
-    title:'VIL-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-VIL&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisVIL_LPA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-VIL&',
-    layer:'irisVIL_LPA_mask',
   },
   {
     title:'VIL-COMP-NAC',
@@ -1417,22 +1939,34 @@ var dataChooserConfigurationVIL = [
 //contenido carpeta PPID
 var dataChooserConfigurationPPID = [
   {
-    title:'PPID-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_ALM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPID-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_ALM_mask',
+    layer:'irisPPID_AHR_mask',
   },
   {
-    title:'PPID-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_BAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPID-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_BAD_mask',
+    layer:'irisPPID_AMG_mask',
   },
   {
-    title:'PPID-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_BAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPID-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_BAR_mask',
+    layer:'irisPPID_ATN_mask',
+  },
+  {
+    title:'PPID-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_BNV_mask',
+  },
+  {
+    title:'PPID-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_CLG_mask',
   },
   {
     title:'PPID-COR',
@@ -1440,29 +1974,41 @@ var dataChooserConfigurationPPID = [
     service:server + '/adagucserver?dataset=IRIS-PPID&',
     layer:'irisPPID_COR_mask',
   },
-   {
+  {
+    title:'PPID-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_GLD_mask',
+  },
+  {
+    title:'PPID-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_GRM_mask',
+  },
+  {
     title:'PPID-LID',
     thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
     layer:'irisPPID_LID_mask',
   },
   {
-    title:'PPID-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_MAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_MAD_mask',
-  },
-  {
-    title:'PPID-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_MAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_MAL_mask',
-  },
-  {
     title:'PPID-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_MUR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
     layer:'irisPPID_MUR_mask',
+  },
+  {
+    title:'PPID-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_NJR_mask',
+  },
+  {
+    title:'PPID-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_PDG_mask',
   },
   {
     title:'PPID-PMA',
@@ -1477,10 +2023,10 @@ var dataChooserConfigurationPPID = [
     layer:'irisPPID_SAN_mask',
   },
   {
-    title:'PPID-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_SEV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPID-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_SEV_mask',
+    layer:'irisPPID_SFT_mask',
   },
   {
     title:'PPID-SSE',
@@ -1489,44 +2035,50 @@ var dataChooserConfigurationPPID = [
     layer:'irisPPID_SSE_mask',
   },
   {
+    title:'PPID-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPID&',
+    layer:'irisPPID_TJV_mask',
+  },
+  {
     title:'PPID-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPID&',
     layer:'irisPPID_VAL_mask',
-  },
-  {
-    title:'PPID-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_ZAR_mask',
-  },
-  {
-    title:'PPID-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-PPID&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPID_LPA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPID&',
-    layer:'irisPPID_LPA_mask',
-  },
+  }
 ]
 
 //contenido carpeta PPIW
 var dataChooserConfigurationPPIW = [
   {
-    title:'PPIW-ALM',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_ALM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPIW-AHR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_AHR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_ALM_mask',
+    layer:'irisPPIW_AHR_mask',
   },
   {
-    title:'PPIW-BAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_BAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPIW-AMG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_AMG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_BAD_mask',
+    layer:'irisPPIW_AMG_mask',
   },
   {
-    title:'PPIW-BAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_BAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPIW-ATN',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_ATN_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_BAR_mask',
+    layer:'irisPPIW_ATN_mask',
+  },
+  {
+    title:'PPIW-BNV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_BNV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_BNV_mask',
+  },
+  {
+    title:'PPIW-CLG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_CLG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_CLG_mask',
   },
   {
     title:'PPIW-COR',
@@ -1534,29 +2086,41 @@ var dataChooserConfigurationPPIW = [
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
     layer:'irisPPIW_COR_mask',
   },
-   {
+  {
+    title:'PPIW-GLD',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_GLD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_GLD_mask',
+  },
+  {
+    title:'PPIW-GRM',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_GRM_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_GRM_mask',
+  },
+  {
     title:'PPIW-LID',
     thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_LID_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
     layer:'irisPPIW_LID_mask',
   },
   {
-    title:'PPIW-MAD',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_MAD_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_MAD_mask',
-  },
-  {
-    title:'PPIW-MAL',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_MAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_MAL_mask',
-  },
-  {
     title:'PPIW-MUR',
     thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_MUR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
     layer:'irisPPIW_MUR_mask',
+  },
+  {
+    title:'PPIW-NJR',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_NJR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_NJR_mask',
+  },
+  {
+    title:'PPIW-PDG',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_PDG_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_PDG_mask',
   },
   {
     title:'PPIW-PMA',
@@ -1571,10 +2135,10 @@ var dataChooserConfigurationPPIW = [
     layer:'irisPPIW_SAN_mask',
   },
   {
-    title:'PPIW-SEV',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_SEV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    title:'PPIW-SFT',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_SFT_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_SEV_mask',
+    layer:'irisPPIW_SFT_mask',
   },
   {
     title:'PPIW-SSE',
@@ -1583,126 +2147,120 @@ var dataChooserConfigurationPPIW = [
     layer:'irisPPIW_SSE_mask',
   },
   {
+    title:'PPIW-TJV',
+    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_TJV_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=IRIS-PPIW&',
+    layer:'irisPPIW_TJV_mask',
+  },
+  {
     title:'PPIW-VAL',
     thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_VAL_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
     service:server + '/adagucserver?dataset=IRIS-PPIW&',
     layer:'irisPPIW_VAL_mask',
-  },
-  {
-    title:'PPIW-ZAR',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_ZAR_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_ZAR_mask',
-  },
-  {
-    title:'PPIW-LPA',
-    thumbnail:server + '/wms?DATASET=IRIS-PPIW&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,irisPPIW_LPA_mask&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=IRIS-PPIW&',
-    layer:'irisPPIW_LPA_mask',
-  },
+  }
 ]
 
 //Contenido carpeta YRADAR
 var dataChooserConfigurationYRAD2D = [
   {
     title:'YRAD2D-ALM',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_ALM&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_ALM&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_ALM',
   },
   {
     title:'YRAD2D-BAD',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_BAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_BAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_BAD',
   },
   {
     title:'YRAD2D-BAR',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_BAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_BAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_BAR',
   },
   {
     title:'YRAD2D-COR',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_COR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_COR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_COR',
   },
    {
     title:'YRAD2D-LID',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_LID&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_LID&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_LID',
   },
   {
     title:'YRAD2D-MAD',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_MAD',
   },
   {
     title:'YRAD2D-MAL',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_MAL',
   },
   {
     title:'YRAD2D-MUR',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MUR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_MUR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_MUR',
   },
   {
     title:'YRAD2D-PMA',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_PMA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_PMA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_PMA',
   },
   {
     title:'YRAD2D-SAN',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SAN&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SAN&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_SAN',
   },
   {
     title:'YRAD2D-SEV',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SEV&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SEV&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_SEV',
   },
   {
     title:'YRAD2D-SSE',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SSE&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_SSE&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_SSE',
   },
   {
     title:'YRAD2D-VAL',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_VAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_VAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_VAL',
   },
   {
     title:'YRAD2D-ZAR',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_ZAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_ZAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_ZAR',
   },
   {
     title:'YRAD2D-LPA',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_LPA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_LPA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD2D_LPA',
   },{
     title:'YRAD2D-NAC',
-    thumbnail:server + '/wms?DATASET=YRADN2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_NAC&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRADN2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_NAC&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     abs:'Composicion yradr a partir de la composicion nacional radar',
     layer:'YRAD2D_NAC',
   },{
     title:'YRAD2D-COM',
-    thumbnail:server + '/wms?DATASET=YRAD2D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_COM&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD2D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD2D_COM&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     abs:'Composicion de todos los YRADAR REG',
     layer:'YRAD2D_COM',
   }
@@ -1712,96 +2270,96 @@ var dataChooserConfigurationYRAD2D = [
 var dataChooserConfigurationYRAD3D = [
   {
     title:'YRAD3D-ALM',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_ALM&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_ALM&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_ALM',
   },
   {
     title:'YRAD3D-BAD',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_BAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_BAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_BAD',
   },
   {
     title:'YRAD3D-BAR',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_BAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_BAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_BAR',
   },
   {
     title:'YRAD3D-COR',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_COR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_COR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_COR',
   },
    {
     title:'YRAD3D-LID',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_LID&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_LID&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_LID',
   }, {
     title:'YRAD3D-MAD',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MAD&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_MAD',
   },
   {
     title:'YRAD3D-MAL',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_MAL',
   },
   {
     title:'YRAD3D-MUR',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MUR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_MUR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_MUR',
   },
   {
     title:'YRAD3D-PMA',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_PMA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_PMA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_PMA',
   },
   {
     title:'YRAD3D-SAN',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SAN&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SAN&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_SAN',
   },
   {
     title:'YRAD3D-SEV',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SEV&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SEV&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_SEV',
   },
   {
     title:'YRAD3D-SSE',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SSE&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_SSE&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_SSE',
   },
   {
     title:'YRAD3D-VAL',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_VAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_VAL&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_VAL',
   },
   {
     title:'YRAD3D-ZAR',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_ZAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_ZAR&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_ZAR',
   },
   {
     title:'YRAD3D-LPA',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_LPA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_LPA&&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     layer:'YRAD3D_LPA',
   },{
     title:'YRAD3D-COM',
-    thumbnail:server + '/wms?DATASET=YRAD3D&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_COM&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
-    service:server + '/adagucserver?dataset=YRAD3D&',
+    thumbnail:server + '/wms?DATASET=YRADAR&SERVICE=WMS&REQUEST=GetMap&&VERSION=1.1.1&SRS=EPSG:4326&LAYERS=overlay,YRAD3D_COM&BBOX=-20,25,10,50WIDTH=900&HEIGHT=800&FORMAT=image/png&TRANSPARENT=TRUE',
+    service:server + '/adagucserver?dataset=YRADAR&',
     abs:'Composicion de todos los YRADAR REG',
     layer:'YRAD3D_COM',
   }
@@ -1812,8 +2370,8 @@ var dataChooserConfigurationYRAD3D = [
 var dataChooserConfigurationMSGOPE = [
   {
     title:'OPERA-RATE',
-    thumbnail:server + '/adagucserver?dataset=OPERA&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,OPERA_rainfall_rate&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
-    service:server + '/adagucserver?dataset=OPERA&&service=WMS&request=GetCapabilities',
+    thumbnail:server + '/adagucserver?dataset=OPERA-COMP-RATE&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=overlay,OPERA_rainfall_rate&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+    service:server + '/adagucserver?dataset=OPERA-COMP-RATE&&service=WMS&request=GetCapabilities',
     layer:'OPERA_rainfall_rate'
   },
   {
@@ -1858,6 +2416,11 @@ var dataChooserConfigurationFoldersTEL = [
   title:"PPI",
   thumbnail:'./img/open-file-folder.png',
   dataChooserConfiguration: dataChooserConfigurationPPI
+  },
+  {
+  title:"CAPPI",
+  thumbnail:'./img/open-file-folder.png',
+  dataChooserConfiguration: dataChooserConfigurationCAPPI
   },
   {
   title:"ECHO-TOP",
@@ -1992,6 +2555,137 @@ var dataChooserConfigurationMSGIMG = [
       layer:'WV073-BT'
 }
 ]
+
+//Contenido de la subcarpeta MSG-RSS
+var dataChooserConfigurationMSGRSS = [
+{
+  title:'HIGH RES',
+      thumbnail:server + '/adagucserver?dataset=RSS-HRV&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=HRV,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-HRV&',
+      layer:'HRV'
+},{
+  title:'VIS006',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=VIS006-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'VIS006-REF'
+},{
+  title:'VIS008',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=VIS008-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'VIS008-REF'
+},{
+  title:'IR016-REF',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR016-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR016-REF'
+},{
+  title:'IR039-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR039-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR039-BT'
+},{
+  title:'IR087-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR087-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR087-BT'
+},{
+  title:'IR097-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR097-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR097-BT'
+},{
+  title:'IR108-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR108-BT'
+},{
+  title:'IR120-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR120-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR120-BT'
+},{
+  title:'IR134-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR134-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'IR134-BT'
+},{
+  title:'WV062-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV062-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'WV062-BT'
+},{
+  title:'WV073-BT',
+      thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV073-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=RSS-3Km&',
+      layer:'WV073-BT'
+}
+]
+
+//Contenido de la subcarpeta MSG-RSS
+var dataChooserConfigurationMSGIODC = [
+{
+  title:'HIGH RES',
+      thumbnail:server + '/adagucserver?dataset=IODC-HRV&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=HRV,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-HRV&',
+      layer:'HRV'
+},{
+  title:'VIS006',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=VIS006-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'VIS006-REF'
+},{
+  title:'VIS008',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=VIS008-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'VIS008-REF'
+},{
+  title:'IR016-REF',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR016-REF,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR016-REF'
+},{
+  title:'IR039-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR039-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR039-BT'
+},{
+  title:'IR087-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR087-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR087-BT'
+},{
+  title:'IR097-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR097-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR097-BT'
+},{
+  title:'IR108-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR108-BT'
+},{
+  title:'IR120-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR120-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR120-BT'
+},{
+  title:'IR134-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR134-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'IR134-BT'
+},{
+  title:'WV062-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV062-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'WV062-BT'
+},{
+  title:'WV073-BT',
+      thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=WV073-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=IODC-3Km&',
+      layer:'WV073-BT'
+}
+]
+
 
 //Contenido carpeta MSG-RGB
 var dataChooserConfigurationMSGRGB = [
@@ -2283,16 +2977,16 @@ var dataChooserConfigurationMSGSAF = [
         layer:'CRR_crr_intensity'
   },{
     title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/crr-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CRR Ph</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
-        thumbnail:server + '/adagucserver?dataset=CRR-Ph&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR-Ph_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
-        service:server + '/adagucserver?dataset=CRR-Ph&',
-        layer:'CRR-Ph_crrph_intensity'
+        thumbnail:server + '/adagucserver?dataset=CRRPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRRPh_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:server + '/adagucserver?dataset=CRRPh&',
+        layer:'CRRPh_crrph_intensity'
   },{
     title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
         thumbnail:server + '/adagucserver?dataset=PC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC_pc,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
         service:server + '/adagucserver?dataset=PC&',
         layer:'PC_pc'
   },{
-    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PC Ph</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PCPh</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
         thumbnail:server + '/adagucserver?dataset=PC-Ph&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC-Ph_pcph,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
         service:server + '/adagucserver?dataset=PC-Ph&',
         layer:'PC-Ph_pcph'
@@ -2339,13 +3033,152 @@ var dataChooserConfigurationMSGSAF = [
   }
 ]
 
+//Contenido carpeta MTG-SAF
+var dataChooserConfigurationMTGSAF = [
+ {
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cma_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Cloud Mask</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMA&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMA_cma_cloudsnow,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMA&',
+        layer:'CMA_cma_cloudsnow'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CMA</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CMA&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CMA_cma,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CMA&',
+        layer:'EXIM_CMA_cma'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ct_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Cloud Type</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CT&',
+        layer:'CT_ct'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CT</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CT&',
+        layer:'EXIM_CT_ct'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ctth_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CTTH in FL</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CTTH_ctth_hfeet,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CTTH&',
+        layer:'CTTH_ctth_hfeet'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CTTH</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CTTH_ctth_alti,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CTTH_ctth_alti'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cmic_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMIC&',
+        layer:'CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CTTH</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CTTH&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CTTH_ctth_alti,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CTTH_ctth_alti'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/cmic_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CMIC&',
+        layer:'CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/exim_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>EXIM CMIC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=EXIM-CMIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EXIM_CMIC_cmic_phase,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=EXIM-CTTH&',
+        layer:'EXIM_CMIC_cmic_phase'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/crr_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CRR</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CRR&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR_crr_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CRR&',
+        layer:'CRR_crr_intensity'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/crr-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CRRPh</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CRRPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CRR-Ph_crrph_intensity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CRRPh&',
+        layer:'CRR-Ph_crrph_intensity'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PC</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=PC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC_pc,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=PC&',
+        layer:'PC_pc'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/pc-ph_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>PCPh</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=PCPh&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PC-Ph_pcph,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=PC-Ph&',
+        layer:'PC-Ph_pcph'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/rdt_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>RDT-CW</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=RDT_NOW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=RDT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/wms?DATASET=RDT_NOW&',
+        layer:'RDT'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ci_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>CI</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=CI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CI_ci_prob90,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=CI&',
+        layer:'CI_ci_prob90'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ishai_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>LIFTED INDEX</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=iSHAI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=iSHAI_IR_band,iSHAI_ishai_li,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=iSHAI&',
+        layer:'iSHAI_ishai_li'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/ishai_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>HUMIDITY DIF NWP/MSG</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=iSHAI&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=iSHAI_IR_band,iSHAI_ishai_diffml,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=iSHAI&',
+        layer:'iSHAI_ishai_diffml'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/hrw_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>WIND</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=HRW_MTG&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=windHRW,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=HRW_MTG&',
+        layer:'Wind_pressure2'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII TF</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-TF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-TF_asii_turb_trop_prob,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-TF&',
+        layer:'ASII-TF_asii_turb_trop_prob'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII GW IR</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-GW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Gravity_Waves_IR,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-GW&',
+        layer:'Gravity_Waves_IR'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>ASII GW WV</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-GW&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Gravity_Waves_WV,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-GW&',
+        layer:'Gravity_Waves_WV'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Liquid ICE ASII</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-ICE&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-ICE_asiiice_sc_mask,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-ICE&',
+        layer:'ASII-ICE_asiiice_sc_mask'
+  },{
+    title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/asii-ng_description' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td>Crystals ICE ASII</td><td>&nbsp;&nbsp;</td><td></td></tr></table></body>",
+        thumbnail:serverMTG + '/adagucserver?dataset=ASII-ICE&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ASII-ICE_asiiice_haic_mask,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+        service:serverMTG + '/adagucserver?dataset=ASII-ICE&',
+        layer:'ASII-ICE_asiiice_haic_mask'
+  }
+]
+
+//--------------------------------------------------------------------------------------------------
+
+
+
 
 //Contenido carpeta del menu MSG
 var dataChooserConfigurationFoldersMSG = [
   {
-  title:"<body> <table><tr><td><a href='https://www.eumetsat.int/mfg-calibration' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;METEOSAT IMAGES BT /Refl.</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
+  title:"<body> <table><tr><td><a href='https://www.eumetsat.int/mfg-calibration' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;METEOSAT 0DEG IMAGES /Refl.</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
   thumbnail:server + '/adagucserver?dataset=SEVIRI-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
   dataChooserConfiguration: dataChooserConfigurationMSGIMG
+  },
+  {
+  title:"<body> <table><tr><td><a href='https://www.eumetsat.int/mfg-calibration' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;METEOSAT RSS IMAGES /Refl.</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
+  thumbnail:server + '/adagucserver?dataset=RSS-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+  dataChooserConfiguration: dataChooserConfigurationMSGRSS
+  },
+  {
+  title:"<body> <table><tr><td><a href='https://www.eumetsat.int/mfg-calibration' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;METEOSAT IODC IMAGES /Refl.</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
+  thumbnail:server + '/adagucserver?dataset=IODC-3Km&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=IR108-BT,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=15,40,36,70&FORMAT=image/png&TRANSPARENT=TRUE&',
+  dataChooserConfiguration: dataChooserConfigurationMSGIODC
   },
   {
   title:"<body> <table><tr><td><a href='http://www.eumetrain.org/RGBguide/rgbs.html' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;     METEOSAT RGB</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
@@ -2367,18 +3200,18 @@ var dataChooserConfigurationFoldersMSG = [
 
 //----------------------------------------CARPETA NWP --------------------------------------------------
 //Contenido carpeta del menu NWP
-var dataChooserConfigurationFoldersNWP = [
-  {
-  title:"NWP",
-  thumbnail:'./img/open-file-folder.png',
-  dataChooserConfiguration: dataChooserConfigurationNWP
-  }
-]
+//var dataChooserConfigurationFoldersNWP = [
+//  {
+//  title:"NWP",
+//  thumbnail:'./img/open-file-folder.png',
+//  dataChooserConfiguration: dataChooserConfigurationNWP
+//  }
+//]
 //---------------------------------------FIN CARPETA NWP ------------------------------------------------
 //
-//----------------------------------------CARPETA ECMWF --------------------------------------------------
-//Contenido carpeta del menu ECMWF
-var dataChooserConfigurationFoldersECMWF = [
+//----------------------------------------CARPETA MENU NWP --------------------------------------------------
+//Contenido carpeta del menu NWP
+var dataChooserConfigurationFoldersNWP = [
   {
   title:"ECMWF",
   thumbnail:'./img/open-file-folder.png',
@@ -2390,12 +3223,38 @@ var dataChooserConfigurationFoldersECMWF = [
   dataChooserConfiguration: dataChooserConfigurationECMWFHRES
   },
   {
+  title:"HARMONIE_AIB",
+  thumbnail:'./img/open-file-folder.png',
+  dataChooserConfiguration: dataChooserConfigurationHARMONIE_AIB
+  },
+  {
+  title:"HARMONIE_AIC",
+  thumbnail:'./img/open-file-folder.png',
+  dataChooserConfiguration: dataChooserConfigurationHARMONIE_AIC
+  },
+  {
+  title:"HARMONIE_AIN",
+  thumbnail:'./img/open-file-folder.png',
+  dataChooserConfiguration: dataChooserConfigurationHARMONIE_AIN
+  },
+
+  {
   title:"NWP",
   thumbnail:'./img/open-file-folder.png',
   dataChooserConfiguration: dataChooserConfigurationNWP
   }
 
 ]
+//-----------------------------------CARPETA MTG ---------------------------------------------------------
+//Contenido carpeta del menu MTG
+var dataChooserConfigurationFoldersMTG = [
+  {
+  title:"<body> <table><tr><td><a href='https://www.nwcsaf.org/' target='_blank' rel='noopener noreferrer'>info</a></td><td>&nbsp;&nbsp;</td><td><b>&nbsp;&nbsp;NWC SAF MTG Based</b></td><td>&nbsp;&nbsp;</td><td><h1 ><img src='./img/folder-icon-transparent.png' width='30' height='30'></h1></td></tr></table></body>",
+  thumbnail:serverMTG + '/adagucserver?dataset=CT&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CT_ct,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=25,-20,46,10&FORMAT=image/png&TRANSPARENT=TRUE',
+  dataChooserConfiguration: dataChooserConfigurationMTGSAF
+  },
+]
+//-----------------------------------FIN CARPETA MTG -----------------------------------------------------
 
 //Definimos el nombre y contenido de los botones de la toolbar
 var dataChooser =[
@@ -2408,12 +3267,16 @@ var dataChooser =[
 //Definimos el nombre y el contenido de las carpetas de la toolbar
 var folderChooser =[
  { 
-   title: "MODEL",
-   dataChooserConfigurationFolder: dataChooserConfigurationFoldersECMWF
+   title: "NWP",
+   dataChooserConfigurationFolder: dataChooserConfigurationFoldersNWP
  },
  {
    title: "MSG",
    dataChooserConfigurationFolder: dataChooserConfigurationFoldersMSG
+ },
+ {
+   title: "MTG",
+   dataChooserConfigurationFolder: dataChooserConfigurationFoldersMTG
  },
  {
    title: "OBS",
@@ -2550,8 +3413,11 @@ var xml2jsonrequestURL = "./webmapjs_php/xml2jsonrequest.php?"
 
 //getFeatureInfoApplications.push({name:'EProfile',iconCls:'button_getfeatureinfo'});
 getFeatureInfoApplications.push({name:'AutoWMS',iconCls:'button_getfeatureinfo'});
+//getFeatureInfoApplications.push({name:'Hipatia',iconCls:'button_getfeatureinfo'});
 getFeatureInfoApplications.open = "AutoWMS";
-getFeatureInfoApplications.push({name:'Sondeo',iconCls:'button_getfeatureinfo',location:'apps/tddjs.html'});
+//getFeatureInfoApplications.open = "Hipatia";
+//getFeatureInfoApplications.push({name:'Sondeo',iconCls:'button_getfeatureinfo',location:'apps/tddjs.html'});
+getFeatureInfoApplications.push({name:'VertProfiles',iconCls:'button_getfeatureinfo',location:'apps/tddjs.html'});
 getFeatureInfoApplications.push({name:'Yradar',iconCls:'button_getfeatureinfo',location:'apps/yradar.html'});
 //getFeatureInfoApplications.open = 'EProfile';
 // xml2jsonrequestURL = 'http://localhost:8080/adaguc-services/xml2json?'
@@ -2990,7 +3856,11 @@ var WMJSTileRendererTileSettings = {
   },
   
 };
+//Default of sinc of layers
+sync_layer=false
+//Default of Auto reload of layers
+auto_load=true
 
 xml2jsonrequestURL = '/adaguc-services/xml2json?'
 //autowmsURL = '/adaguc-services/autowms?';
-autowmsURL = '/autowms?';
+autowmsURL = server+'/autowms?';
