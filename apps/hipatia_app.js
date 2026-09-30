@@ -42,7 +42,7 @@ var hipatia_app = function (element, webmapjs) {
           for (var j=0;j<datalist.length;j++){
             if (datalist[j]!=""){  proj_list.push(datalist[j].trim())} 
           } 
-          if (! hipatiaURL || hipatiaURL === "") {
+          if (! hipatiaURL || hipatiaURL === "undefined") {
             hipatiaURL = proj_list[0] ;
           }
           makeFileListRequest("");
