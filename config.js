@@ -42,7 +42,7 @@ var logo ="./logo_AEMET.png"
 
 //var server1 = "http://dorsal.aemet.es:8080/adaguc-services/" 
 //Docker
-var server = "https://vortice2.aemet.es/"
+var server = "https://dorsal.aemet.es/"
 var serverMTG = "https://adaguc_mtg.aemet.es/"
 
 
@@ -602,7 +602,7 @@ var dataChooserConfigurationHARMONIE_AIB = [
       abs:'10 meter wind last hour (Barbs/Vectors)',
 
 },{
-      title:'10m Wind Kt',
+      title:'10m Wind kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIB&',
       layer:'10_meter_wind_kt',
@@ -623,7 +623,7 @@ var dataChooserConfigurationHARMONIE_AIB = [
       abs:'10 meter max gust last hour (Barbs/Vectors)',
 
 },{
-      title:'10m MaxGust Kt',
+      title:'10m MaxGust kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIB&',
       layer:'10_meter_max_gust_during_last_hour_kt',
@@ -635,15 +635,169 @@ var dataChooserConfigurationHARMONIE_AIB = [
       service:server + '/adagucserver?dataset=HARMONIE_AIB&',
       layer:'10_meter_max_gust_during_last_hour_ms',
       abs:'10 meter max gust last hour (m/s)',
-
 },{
-      title:'Total precipitation 1h',
+      title:'Total cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'total_cloud_cover',
+      abs:'Total cloud cover',
+},{
+      title:'Low cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=low_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'low_cloud_cover',
+      abs:'Low cloud cover',
+},{
+      title:'Medium cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'medium_cloud_cover',
+      abs:'Medium cloud cover',
+},{
+      title:'High cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=high_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'high_cloud_cover',
+      abs:'High cloud cover',
+},{
+      title:'Composed cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'composed_cloud_cover',
+      abs:'Composed cloud cover',
+},{
+      title:'Surface pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=surface_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'surface_pressure',
+      abs:'Surface pressure',
+},{
+      title:'2m Air temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_air_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'2m_air_temperature',
+      abs:'2m Air temperature',
+},{
+      title:'2m Dewpoint temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'2m_dewpoint_temperature',
+      abs:'2m Dewpoint temperature',
+},{
+      title:'Sea surface temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=sea_surface_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'sea_surface_temperature',
+      abs:'Sea surface temperature',
+},{
+      title:'2m Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'2m_relative_humidity',
+      abs:'2m Relative humidity',
+},{
+      title:'2m Specific humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_specific_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'2m_specific_humidity',
+      abs:'2m Specific humidity',
+},{
+      title:'Surface geopotential height',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=sfc_geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'sfc_geopotential_height',
+      abs:'Surface geopotential height',
+},{
+      title:'Visibility',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=visibility,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'visibility',
+      abs:'Visibility',
+},{
+      title:'CAPE',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CAPE,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'CAPE',
+      abs:'CAPE',
+},{
+      title:'CIN',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CIN,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'CIN',
+      abs:'CIN',
+},{
+      title:'Snow density',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=snow_density,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'snow_density',
+      abs:'Snow density',
+},{
+      title:'Snowfall water equivalent',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=snowfall_water_equivalent,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'snowfall_water_equivalent',
+      abs:'Snowfall water equivalent',
+},{
+      title:'Total accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'total_accumulated_precipitation',
+      abs:'Total accumulated precipitation',
+},{
+      title:'Total precipitation during last hour',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIB&',
       layer:'total_precipitation_during_last_hour',
       abs:'Total precipitation during last hour',
-
-},
+},{
+      title:'Solid accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'solid_accumulated_precipitation',
+      abs:'Solid accumulated precipitation',
+},{
+      title:'Solid precipitation during last hour',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'solid_precipitation_during_last_hour',
+      abs:'Solid precipitation during last hour',
+},{
+      title:'Air temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=air_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'air_temperature',
+      abs:'Air temperature',
+},{
+      title:'Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'relative_humidity',
+      abs:'Relative humidity',
+},{
+      title:'Geopotential height',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'geopotential_height',
+      abs:'Geopotential height',
+},{
+      title:'Wind m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'wind',
+      abs:'Wind m/s',
+},{
+      title:'Wind kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'wind_kt',
+      abs:'Wind kt',
+},{
+      title:'Wind B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIB&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIB&',
+      layer:'wind_barbs_vectors',
+      abs:'Wind B/V',
+},	
 ]
 var dataChooserConfigurationHARMONIE_AIC = [
 {
@@ -660,7 +814,7 @@ var dataChooserConfigurationHARMONIE_AIC = [
       abs:'10 meter max gust last hour (Barbs/Vectors)',
 
 },{
-      title:'10m Wind Kt',
+      title:'10m Wind kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIC&',
       layer:'10_meter_wind_kt',
@@ -681,7 +835,7 @@ var dataChooserConfigurationHARMONIE_AIC = [
       abs:'10 meter max gust last hour (Barbs/Vectors)',
 
 },{
-      title:'10m MaxGust Kt',
+      title:'10m MaxGust kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIC&',
       layer:'10_meter_max_gust_during_last_hour_kt',
@@ -693,14 +847,168 @@ var dataChooserConfigurationHARMONIE_AIC = [
       service:server + '/adagucserver?dataset=HARMONIE_AIC&',
       layer:'10_meter_max_gust_during_last_hour_ms',
       abs:'10 meter max gust last hour (m/s)',
-
 },{
-      title:'Total precipitation 1h',
+      title:'Total cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'total_cloud_cover',
+      abs:'Total cloud cover',
+},{
+      title:'Low cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=low_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'low_cloud_cover',
+      abs:'Low cloud cover',
+},{
+      title:'Medium cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'medium_cloud_cover',
+      abs:'Medium cloud cover',
+},{
+      title:'High cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=high_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'high_cloud_cover',
+      abs:'High cloud cover',
+},{
+      title:'Composed cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'composed_cloud_cover',
+      abs:'Composed cloud cover',
+},{
+      title:'Surface pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=surface_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'surface_pressure',
+      abs:'Surface pressure',
+},{
+      title:'2m Air temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_air_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'2m_air_temperature',
+      abs:'2m Air temperature',
+},{
+      title:'2m Dewpoint temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'2m_dewpoint_temperature',
+      abs:'2m Dewpoint temperature',
+},{
+      title:'Sea surface temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=sea_surface_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'sea_surface_temperature',
+      abs:'Sea surface temperature',
+},{
+      title:'2m Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'2m_relative_humidity',
+      abs:'2m Relative humidity',
+},{
+      title:'2m Specific humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_specific_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'2m_specific_humidity',
+      abs:'2m Specific humidity',
+},{
+      title:'Surface geopotential height',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=sfc_geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'sfc_geopotential_height',
+      abs:'Surface geopotential height',
+},{
+      title:'Visibility',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=visibility,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'visibility',
+      abs:'Visibility',
+},{
+      title:'CAPE',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CAPE,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'CAPE',
+      abs:'CAPE',
+},{
+      title:'CIN',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CIN,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'CIN',
+      abs:'CIN',
+},{
+      title:'Snow density',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=snow_density,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'snow_density',
+      abs:'Snow density',
+},{
+      title:'Snowfall water equivalent',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=snowfall_water_equivalent,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'snowfall_water_equivalent',
+      abs:'Snowfall water equivalent',
+},{
+      title:'Total accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'total_accumulated_precipitation',
+      abs:'Total accumulated precipitation',
+},{
+      title:'Total precipitation during last hour',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIC&',
       layer:'total_precipitation_during_last_hour',
       abs:'Total precipitation during last hour',
-
+},{
+      title:'Solid accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'solid_accumulated_precipitation',
+      abs:'Solid accumulated precipitation',
+},{
+      title:'Solid precipitation during last hour',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'solid_precipitation_during_last_hour',
+      abs:'Solid precipitation during last hour',
+},{
+      title:'Air temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=air_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'air_temperature',
+      abs:'Air temperature',
+},{
+      title:'Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'relative_humidity',
+      abs:'Relative humidity',
+},{
+      title:'Geopotential height',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'geopotential_height',
+      abs:'Geopotential height',
+},{
+      title:'Wind m/s',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'wind',
+      abs:'Wind m/s',
+},{
+      title:'Wind kt',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'wind_kt',
+      abs:'Wind kt',
+},{
+      title:'Wind B/V',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIC&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=wind_barbs_vectors,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=23,-25,31,-5&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIC&',
+      layer:'wind_barbs_vectors',
+      abs:'Wind B/V',
 },
 ]
 
@@ -720,7 +1028,7 @@ var dataChooserConfigurationHARMONIE_AIN = [
       abs:'10 meter wind last hour (Barbs/Vectors)',
 
 },{
-      title:'10m Wind Kt',
+      title:'10m Wind kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_wind_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIN&',
       layer:'10_meter_wind_kt',
@@ -741,7 +1049,7 @@ var dataChooserConfigurationHARMONIE_AIN = [
       abs:'10 meter max gust last hour (Barbs/Vectors)',
 
 },{
-      title:'10m MaxGust Kt',
+      title:'10m MaxGust kt',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=10_meter_max_gust_during_last_hour_kt,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIN&',
       layer:'10_meter_max_gust_during_last_hour_kt',
@@ -753,14 +1061,114 @@ var dataChooserConfigurationHARMONIE_AIN = [
       service:server + '/adagucserver?dataset=HARMONIE_AIN&',
       layer:'10_meter_max_gust_during_last_hour_ms',
       abs:'10 meter max gust last hour (m/s)',
-
 },{
-      title:'Total precipitation 1h',
+      title:'Total cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'total_cloud_cover',
+      abs:'Total cloud cover',
+},{
+      title:'Low cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=low_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'low_cloud_cover',
+      abs:'Low cloud cover',
+},{
+      title:'Medium cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=medium_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'medium_cloud_cover',
+      abs:'Medium cloud cover',
+},{
+      title:'High cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=high_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'high_cloud_cover',
+      abs:'High cloud cover',
+},{
+      title:'Composed cloud cover',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=composed_cloud_cover,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'composed_cloud_cover',
+      abs:'Composed cloud cover',
+},{
+      title:'Surface pressure',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=surface_pressure,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'surface_pressure',
+      abs:'Surface pressure',
+},{
+      title:'2m Air temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_air_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'2m_air_temperature',
+      abs:'2m Air temperature',
+},{
+      title:'2m Dewpoint temperature',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_dewpoint_temperature,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'2m_dewpoint_temperature',
+      abs:'2m Dewpoint temperature',
+},{
+      title:'2m Relative humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_relative_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'2m_relative_humidity',
+      abs:'2m Relative humidity',
+},{
+      title:'2m Specific humidity',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=2m_specific_humidity,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'2m_specific_humidity',
+      abs:'2m Specific humidity',
+},{
+      title:'Surface geopotential height',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=sfc_geopotential_height,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'sfc_geopotential_height',
+      abs:'Surface geopotential height',
+},{
+      title:'Visibility',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=visibility,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'visibility',
+      abs:'Visibility',
+},{
+      title:'CAPE',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CAPE,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'CAPE',
+      abs:'CAPE',
+},{
+      title:'CIN',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=CIN,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'CIN',
+      abs:'CIN',
+},{
+      title:'Total accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'total_accumulated_precipitation',
+      abs:'Total accumulated precipitation',
+},{
+      title:'Total precipitation during last hour',
       thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=total_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
       service:server + '/adagucserver?dataset=HARMONIE_AIN&',
       layer:'total_precipitation_during_last_hour',
       abs:'Total precipitation during last hour',
-
+},{
+      title:'Solid accumulated precipitation',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_accumulated_precipitation,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'solid_accumulated_precipitation',
+      abs:'Solid accumulated precipitation',
+},{
+      title:'Solid precipitation during last hour',
+      thumbnail:server + '/adagucserver?dataset=HARMONIE_AIN&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=solid_precipitation_during_last_hour,overlay&WIDTH=400&HEIGHT=350&CRS=EPSG:4326&BBOX=29,-20,49,10&FORMAT=image/png&TRANSPARENT=TRUE&',
+      service:server + '/adagucserver?dataset=HARMONIE_AIN&',
+      layer:'solid_precipitation_during_last_hour',
+      abs:'Solid precipitation during last hour',
 },
 ]
 
